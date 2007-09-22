@@ -14,8 +14,8 @@
 development:
   adapter: mysql
   database: exabuch_development
-  username: root
-  password:
+  username: user
+  password: --user+
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as 'test' will be erased and
@@ -24,13 +24,13 @@ development:
 test:
   adapter: mysql
   database: exabuch_test
-  username: root
-  password:
+  username: user
+  password: --user+
   socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql
   database: exabuch_production
-  username: root
-  password: 
+  username: user
+  password: --user+
   socket: /var/run/mysqld/mysqld.sock

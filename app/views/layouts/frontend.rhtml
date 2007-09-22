@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title><%= @page_title %></title>
+
+<meta name="robots" content="index,follow" />
+<meta http-equiv="language" content="de" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="stylesheet" href="stylesheets/frontend.css" type="text/css" media="screen" />
+<%= javascript_include_tag :defaults %>
+<%= active_scaffold_includes %>
+
+<!--[if gte IE 7]>
+<link rel="stylesheet" type="text/css" href="style/ie7andlater.css"/>
+<![endif]-->
+
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="style/ie6andearlier.css"/>
+<![endif]-->
+
+</head>
+<body>
+  <div id="main">
+    <div id="header"></div>
+    <div id="navi"></div>
+    <div id="content">
+      <%= yield %>
+    </div>
+    <div id="footer"></div>
+  </div>
+  <p id="copyright">&copy; 2007 <a href="http://www.exanto.de/" title="Exanto Internet Solutions">www.exanto.de</a></p>
+</body>
+</html>
+

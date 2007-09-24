@@ -14,7 +14,7 @@ module InvoicesHelper
   end
 
   def tax_column(record)
-    to_currency(record.tax_amount)+" (#{record.tax}%)"
+    to_currency(record.tax_amount)#+" (#{record.tax}%)" # :TODO: display tax-amounts present it .items
   end
   
   def gross_amount_column(record)

@@ -3,7 +3,7 @@ class InvoicesController < ApplicationController
   layout "frontend"
 	active_scaffold :invoice do |config|
     config.label = "Rechnungen"
-    config.columns = [:number, :payed, :billing_date, :payment_date, :title, :description, :items, :net_amount, :tax, :gross_amount, :total]
+    config.columns = [:number, :payed, :billing_date, :payment_date, :title, :description, :items, :net_amount, :tax, :gross_amount]
     config.columns[:number].label = "Nummer"
     config.columns[:billing_date].label = "Rechnung"
     config.columns[:payment_date].label = "Zahlung"

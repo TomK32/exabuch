@@ -17,17 +17,20 @@
 <%= active_scaffold_includes %>
 
 <!--[if gte IE 7]>
-<link rel="stylesheet" type="text/css" href="style/ie7andlater.css"/>
+<link rel="stylesheet" type="text/css" href="stylesheets/ie7andlater.css"/>
 <![endif]-->
 
 <!--[if lte IE 6]>
-<link rel="stylesheet" type="text/css" href="style/ie6andearlier.css"/>
+<link rel="stylesheet" type="text/css" href="stylesheets/ie6andearlier.css"/>
 <![endif]-->
 
 </head>
 <body>
   <div id="main">
-    <div id="header"></div>
+    <div id="header">
+      <h1>ExaBuch :: Rechnungen</h1>
+      <p>Geld ist immer da. Es wechselt nur den Besitzer.</p>
+    </div>
     <div id="navi"></div>
     <div id="content">
       <%= yield %>

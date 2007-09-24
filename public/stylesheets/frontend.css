@@ -1,0 +1,60 @@
+/* Exabuch Styles */
+
+body, div, td, p, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("../images/body_bg.png") #fff repeat-x;
+}
+
+#main {
+  background: #f4f4f4;
+  margin: 0 auto;
+  width: 90%;
+}
+
+#header {
+  background: url("../images/header_bg.png") #131313 repeat-x;
+  height: 140px;
+}
+
+#header h1 {
+  font-size: 25px;
+  padding: 60px 0 0 20px;
+}
+
+#header p {
+  font-size: 12px;
+  padding-left: 20px;
+}
+
+#content {
+  border: 1px solid #eee;
+  padding: 30px 20px;
+}
+
+#copyright,
+#copyright a {
+  color: #999;
+  font-size: 11px;
+  padding: 0.5em 0;
+  text-decoration: none;
+}
+
+#copyright {
+  text-align: center;
+}
+
+/* ActiveScaffold */
+.items-column,
+.tax-column {
+  width: 10%;
+}
+
+.number-column,
+.billing_date-column,
+.payment_date-column {
+  width: 1%;
+}

@@ -1,8 +1,9 @@
 class CreateTotals < ActiveRecord::Migration
   def self.up
     create_table :totals do |t|
-			t.column :tax, :integer
-			t.column :total, :decimal, {:precision => 8, :default => 0}
+      t.column :invoice_id, :integer
+			t.column :tax, :integer, {:default => 19}
+			t.column :total_in_cents, :integer
     end
   end
 

@@ -1,5 +1,30 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+horst_address:
   id: 1
-two:
+  title: Herr
+  company: Wolle Inc.
+  name: Horst Tester
+  street: Sonnenallee
+  street_number: 33
+  postcode: 21138
+  city: Berlin
+  country: Deutschland
+  tax_number: 99/177/55333
+  account_number: 77 33 11 99
+  bank_name: Europäische Zentralbank
+  bank_number: 610 433 838
+gabi_address:
   id: 2
+  title: Frau
+  company: Nucknuck Ltd.
+  name: Gabi Tester
+  street: Sonnenstraße
+  street_number: 13
+  postcode: 21144
+  city: Buxtehude
+  country: Deutschland
+  tax_number: 44/122/99933
+  account_number: 33 66 15 99
+  bank_name: Spaßkasse Buxtehude
+  bank_number: 300 400 123
+  

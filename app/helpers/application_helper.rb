@@ -5,8 +5,8 @@ module ApplicationHelper
     number_with_delimiter(number_with_precision(val, precision), delimiter, separator)+" "+unit
   end
 
+  # simple translation for AS
   def as_(*args)
-    stuff = String.new
     args.each do |arg|
       case arg
         when "hide"
@@ -19,8 +19,13 @@ module ApplicationHelper
           return "Keine Einträge"
         when "Found"
           return "gefunden"
+        when "Update"
+          return "Aktualisieren"
+        when "Cancel"
+          return "Abbrechen"
       end
     end
+    super
   end
   
 end

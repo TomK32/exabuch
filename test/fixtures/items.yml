@@ -1,5 +1,33 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+sonnenbrille:
   id: 1
-two:
+  invoice_id: 1
+  title: Sonnenbrille
+  description: Braucht man einfach
+  amount: 3
+  price_in_cents: 2590
+  tax: 19
+rueckenmassage:
   id: 2
+  invoice_id: 2
+  title: Rückenmassage
+  description: Dringend notwendig manchmal
+  amount: 3
+  price_in_cents: 1990
+  tax: 19
+wollknaeuel:
+  id: 3
+  invoice_id: 1
+  title: Wollknäuel
+  description: Sam&Max... anyone?
+  amount: 3
+  price_in_cents: 3550
+  tax: 19
+katzenhaar:
+  id: 4
+  invoice_id: 2
+  title: Katzenhaar
+  description: Rausgewürgtes Katzenhaar
+  amount: 3
+  price_in_cents: 990
+  tax: 19

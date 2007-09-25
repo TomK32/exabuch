@@ -9,6 +9,10 @@ class CreateAddresses < ActiveRecord::Migration
 			t.column :postcode, :string
       t.column :city, :string
 			t.column :country, :string
+      t.column :tax_number, :string
+      t.column :account_number, :string
+      t.column :bank_name, :string
+      t.column :bank_number, :string
     end
   end
 

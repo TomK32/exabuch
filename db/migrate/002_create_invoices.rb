@@ -5,7 +5,9 @@ class CreateInvoices < ActiveRecord::Migration
       t.column :payed, :boolean, {:default => false}
 			t.column :title, :string
 			t.column :description, :string
+      t.column :order_date, :date
 			t.column :billing_date, :date
+      t.column :shipping_date, :date
 			t.column :payment_date, :date
 			t.column :created_at, :datetime
 			t.column :updated_at, :datetime

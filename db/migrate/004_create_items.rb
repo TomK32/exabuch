@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration
 			t.column :description, :string
 			t.column :amount, :float, {:precision => 2}
 			t.column :price_in_cents, :integer
-      t.column :tax, :integer, {:default => 19}
+      t.column :tax, :integer
     end
   end
 

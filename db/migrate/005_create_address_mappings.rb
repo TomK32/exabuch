@@ -1,7 +1,8 @@
 class CreateAddressMappings < ActiveRecord::Migration
   def self.up
     create_table :address_mappings do |t|
-			t.column :invoice_id, :integer
+      t.column :invoice_sender_id, :integer
+      t.column :invoice_receiver_id, :integer
 			t.column :address_id, :integer
 			t.column :created_at, :datetime
 			t.column :updated_at, :datetime

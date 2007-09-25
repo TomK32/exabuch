@@ -1,8 +1,10 @@
 class Invoice < ActiveRecord::Base
 
 	has_many :items, :dependent => :destroy
-	has_many :address_mappings
-  has_many :addresses, :through => :address_mappings
+  has_one :sender, :class_name => "AddressMapping", :foreign_key => "invoice_sender_id"
+  has_one :receiver, :class_name => "AddressMapping", :foreign_key => "invoice_receiver_id"
+	#has_many :address_mappings
+  #has_many :addresses, :through => :address_mappings
   validates_presence_of :number, :title
   validates_uniqueness_of :number
 

@@ -20,5 +20,30 @@ module InvoicesHelper
   def gross_amount_column(record)
     to_currency(record.gross_amount)
   end
+
+  def sender_column(record)
+    record.sender.address.name
+  end
+
+  def receiver_column(record)
+    record.receiver.address.name
+  end
+
+  def payed_column(record)
+    record.payed == true ? "Ja" : "Nein"
+  end
+  
+  def payed_form_column(record, input_name)
+    check_box :record, :payed, :name => input_name
+  end
+
+  def options_for_association_conditions(association)
+    if association.name == :sender || association.name == :receiver
+      # we don't want to exchange associations
+      ['1 = 0']
+    else
+      super
+    end
+  end
   
 end

@@ -1,7 +1,10 @@
 class InvoicesController < ApplicationController
 
   require 'fpdf'
+  load 'fpdf_table.rb'
+  load 'fpdf_invoice.rb'
   require 'iconv'
+  
   layout "frontend"
   
 	active_scaffold :invoice do |config|
@@ -55,29 +58,23 @@ class InvoicesController < ApplicationController
   # renders invoice for pdf-output
   def to_pdf
     @invoice  = Invoice.find(params[:id])
-    @sender   = @invoice.sender.address
-    @receiver = @invoice.receiver.address
     filename  = (@invoice.billing_date.to_s+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
-    send_data gen_pdf, :filename => filename, :type => "application/pdf"
+    send_data gen_invoice_pdf, :filename => filename, :type => "application/pdf"
   end
 
   private
-  def gen_pdf
-    @pdf = FPDF.new
-    @pdf.AddPage
-    @pdf.SetFont('times')
-    @pdf.SetFontSize(12)
-    text = render_to_string :action => "print", :layout => false
-    @pdf.Write(5, replace_UTF8(text))
-    @pdf.Output
-  end
 
-  # workaround... fpdf doesn't do utf-8
-  def replace_UTF8(field)
-    ic_ignore = Iconv.new('ISO-8859-15//IGNORE//TRANSLIT', 'UTF-8')
-    field = ic_ignore.iconv(field)
-    ic_ignore.close  
-    field
+  # generates PDF for given invoice
+  # see /lib/fpdf/fpdf_invoice.rb + fpdf_table for details
+  def gen_invoice_pdf
+    @pdf = FPDF.new
+    @pdf.extend(FPDF_INVOICE)
+    @pdf.extend(Fpdf::Table)
+    @pdf.extend(ApplicationHelper)
+    @pdf.extend(ActionView::Helpers::NumberHelper)
+    @pdf.AddPage
+    @pdf.BuildInvoice(@invoice)
+    @pdf.Output
   end
 
 end

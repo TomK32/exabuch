@@ -23,6 +23,12 @@ module ApplicationHelper
           return "Aktualisieren"
         when "Cancel"
           return "Abbrechen"
+        when "Close"
+          return "Schließen"
+        when "Create Another"
+          return "Weiteres Element"
+        when "Create"
+          return "Anlegen"
       end
     end
     super

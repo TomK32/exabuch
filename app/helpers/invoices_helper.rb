@@ -1,9 +1,20 @@
 module InvoicesHelper
 
+  #
+  # ActiveScaffold
+  #
   def billing_date_column(record)
     record.billing_date.strftime("%Y-%m-%d")
   end
 
+  def order_date_column(record)
+    record.order_date.strftime("%Y-%m-%d")
+  end
+
+  def shipping_date_column(record)
+    record.shipping_date.strftime("%Y-%m-%d")
+  end
+  
   def payment_date_column(record)
     return record.payment_date.strftime("%Y-%m-%d") unless record.billing_date ==  record.payment_date && record.payed == false
     return "-"
@@ -44,6 +55,14 @@ module InvoicesHelper
     else
       super
     end
+  end
+
+  #
+  # misc
+  #
+
+  def to_filename(string)
+    string.downcase.gsub(" ", "_")
   end
   
 end

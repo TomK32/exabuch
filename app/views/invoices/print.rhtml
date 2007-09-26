@@ -1,5 +1,12 @@
-<%= @invoice.title %>
+<% @pdf.Image('public/images/logo.png', 130, 13, 73.73) -%>
+<%= "Firma" if @sender.company? %>
+<%= @sender.company if @sender.company? %>
+<%= @sender.title+" " if @sender.title? %><%= @sender.name %>
+<%= @sender.street+" "+@sender.street_number if @sender.street? %>
+<%= @sender.postcode+" "+@sender.city if @sender.postcode? && @sender.city? %>
+<%= @sender.country if @sender.country? %>
 
 <% @invoice.items.each do |item| -%>
 <%= item.title %>
 <% end -%>
+

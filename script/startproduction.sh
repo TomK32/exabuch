@@ -1,4 +1,4 @@
-rake db:migrate
+rake db:migrate RAILS_ENV="production"
 rake log:clear
 rake tmp:clear
 rake tmp:cache:clear

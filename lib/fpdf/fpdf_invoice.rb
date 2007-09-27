@@ -152,9 +152,9 @@ module FPDF_INVOICE
     ]
     columns = [
       {:title => nil, :width => 47.5},
-      {:title => nil, :width => 47.5},
-      {:title => nil, :width => 40},
-      {:title => nil, :width => 55}
+      {:title => nil, :width => 45.5},
+      {:title => nil, :width => 34},
+      {:title => nil, :width => 63}
     ]
     # output footer
     SetFontSize(8)

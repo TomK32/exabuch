@@ -7,14 +7,14 @@ module FPDF_INVOICE
   def Header
     logo = 'public/images/logo.png'
     Image(logo, 130, 13, 71) if File.exists?(logo)
-    if File.exists?(logo): Line(5, 35, 205, 35) else Line(5, 10, 205, 10) end
+    if File.exists?(logo): Line(@leftmargin, 35, 200, 35) else Line(@leftmargin, 10, 200, 10) end
     SetY(40)
   end
 
   # Invoice Footer
   def Footer
     SetDrawColor(0)
-    Line(5, 265, 205, 265)
+    Line(@leftmargin, 265, 200, 265)
     PrintFooterAddress(@invoice.sender.address)
   end
 
@@ -23,7 +23,9 @@ module FPDF_INVOICE
     raise "Please provide valid Invoice Object to FPDF_INVOICE::AddPage" if invoice.nil? && @invoice.nil?
     SetFont('vera')
     SetFillColor(210)
-    @lh = 5
+    @lh = 5 #lineheight
+    @leftmargin = 20
+    SetLeftMargin(@leftmargin)
     SetAutoPageBreak(true, 2*@lh)
     super(orientation)
   end
@@ -36,7 +38,7 @@ module FPDF_INVOICE
     MyCell("Rechnung Nr. "+invoice.formated_number)
     SetFont('vera', '', 10)
     Ln(5)
-    SetX(10)
+    SetX(@leftmargin)
     MyWrite(invoice.description)
     Ln(15)
     #
@@ -47,7 +49,7 @@ module FPDF_INVOICE
     end
     columns = [
       {:title => 'Menge', :bg_color => 1, :title_alignment => 'C', :aligment => 'C', :width => 20},
-      {:title => 'Bezeichnung', :bg_color => 1, :width => 100},
+      {:title => 'Bezeichnung', :bg_color => 1, :width => 110-@leftmargin},
       {:title => 'Einzelpreis', :bg_color => 1, :title_alignment => 'R', :aligment => 'R', :width => 35},
       {:title => 'Gesamtpreis', :bg_color => 1, :title_alignment => 'R', :aligment => 'R', :width => 35}
     ]
@@ -154,8 +156,9 @@ module FPDF_INVOICE
       {:title => nil, :width => 40},
       {:title => nil, :width => 55}
     ]
+    # output footer
     SetFontSize(8)
-    SetXY(10, -30)
+    SetXY(@leftmargin, -30)
     SetDrawColor(255) # no border
     table(data, columns, {:line_height => 5})
   end

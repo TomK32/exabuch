@@ -32,7 +32,7 @@ module Fpdf
           x = self.GetX
           y = self.GetY
           self.Rect(x, y, widths[i], h);
-          MultiCell(widths[i], line_height, columns[i][:title], 0, columns[i][:title_alignment] || 'L')
+          MultiCell(widths[i], line_height, columns[i][:title], 0, columns[i][:title_alignment] || 'L', columns[i][:bg_color] || 0)
           self.SetXY(x+widths[i], y)
         end
         self.Ln(h)
@@ -41,15 +41,23 @@ module Fpdf
       data.each do |row|
         h = max_height(widths, row, line_height)
         check_page_break(h)
+        first = true
         row.each_index do |i|
           aligment = columns[i][:aligment] || "L"
-          x = self.GetX
+          if options[:x_pos] && first == true then
+            x = options[:x_pos]
+          else
+            x = self.GetX
+          end
           y = self.GetY
+          self.SetX(x)
           self.Rect(x, y, widths[i], h);
           self.MultiCell(widths[i], line_height, row[i], 0, aligment)
           self.SetXY(x+widths[i], y)
+          first = false
         end
         self.Ln(h)
+        if options[:x_pos]: SetX(options[:x_pos]) end
       end
     end
     

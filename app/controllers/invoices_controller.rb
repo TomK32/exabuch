@@ -72,7 +72,9 @@ class InvoicesController < ApplicationController
     @pdf.extend(Fpdf::Table)
     @pdf.extend(ApplicationHelper)
     @pdf.extend(ActionView::Helpers::NumberHelper)
-    @pdf.AddPage
+    @pdf.AddFont('vera')
+    @pdf.AddFont('verab')
+    @pdf.AddPage('', @invoice)
     @pdf.BuildInvoice(@invoice)
     @pdf.Output
   end

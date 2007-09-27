@@ -63,7 +63,7 @@ module FontDef
         '128 /.notdef 130 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 142 /.notdef 145 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 158 /.notdef /.notdef 164 /Euro 166 /Scaron 168 /scaron 180 /Zcaron 184 /zcaron 188 /OE /oe /Ydieresis'
     end
     def FontDef.file
-        'Vera.z'
+        'vera.z'
     end
     def FontDef.originalsize
         '65932'

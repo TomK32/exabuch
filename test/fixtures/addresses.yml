@@ -2,13 +2,17 @@
 horst_address:
   id: 1
   title: Herr
-  company: Wolle Inc.
+  company: Wollewolle Inc.
   name: Horst Tester
   street: Sonnenallee
   street_number: 33
   postcode: 21138
   city: Berlin
   country: Deutschland
+  call_number: +49 (30) 44 55 33
+  fax_number: +49 (30) 44 55 34
+  email: horst@wolle-incorporated.de
+  website_url: http://www.wollewolle-inc.de/
   tax_number: 99/177/55333
   account_number: 77 33 11 99
   bank_name: Europäische Zentralbank
@@ -16,13 +20,17 @@ horst_address:
 gabi_address:
   id: 2
   title: Frau
-  company: Nucknuck Ltd.
+  company: Erdnuckel Ltd.
   name: Gabi Tester
   street: Sonnenstraße
   street_number: 13
   postcode: 21144
   city: Buxtehude
   country: Deutschland
+  call_number: +49 (30) 44 55 44
+  fax_number: +49 (30) 44 55 45
+  email: gabi@nucknuck.de
+  website_url: http://www.erdnuckel-ltd.de/
   tax_number: 44/122/99933
   account_number: 33 66 15 99
   bank_name: Spaßkasse Buxtehude

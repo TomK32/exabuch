@@ -5,7 +5,7 @@
 module Fpdf
   module Table
     def table(data, columns = nil, options = {})
-      table_width = options['table_width'] || (210 - @rMargin - @lMargin);
+      table_width = options[:table_width] || (210 - @rMargin - @lMargin);
       line_height = options[:line_height] || 5
       widths = []
       no_width_columns = 0

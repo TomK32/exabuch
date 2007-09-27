@@ -2,7 +2,7 @@ class AddressesController < ApplicationController
 
   layout "frontend"
 	active_scaffold :address do |config|
-    config.columns = [:company, :title, :name, :street, :street_number, :postcode, :city, :country, :tax_number, :account_number, :bank_number, :bank_name]
+    config.columns = [:company, :title, :name, :street, :street_number, :postcode, :city, :country,  :call_number, :fax_number, :email, :website_url, :tax_number, :account_number, :iban, :bank_number, :bank_name]
     config.label = "Adressen"
     config.action_links.add 'index', :label => 'Rechnungen', :controller => "invoices", :page => true
     config.actions.swap :search, :live_search
@@ -14,6 +14,10 @@ class AddressesController < ApplicationController
     config.columns[:postcode].label = "PLZ"
     config.columns[:city].label = "Stadt"
     config.columns[:country].label = "Land"
+    config.columns[:call_number].label = "Telefon"
+    config.columns[:fax_number].label = "Fax"
+    config.columns[:email].label = "E-Mail"
+    config.columns[:website_url].label = "Webseite"
     config.columns[:tax_number].label = "Steuernummer"
     config.columns[:account_number].label = "KTO"
     config.columns[:bank_number].label = "BLZ"
@@ -29,7 +33,7 @@ class AddressesController < ApplicationController
     # show
     config.show.link.label = "Zeigen"
     # list
-    config.list.columns.exclude :tax_number, :account_number, :bank_name, :bank_number, :street, :street_number, :country
+    config.list.columns = [:company, :title, :name, :email, :postcode, :city]
 	end
   
 end

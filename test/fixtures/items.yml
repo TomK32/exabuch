@@ -10,7 +10,7 @@ sonnenbrille:
 rueckenmassage:
   id: 2
   invoice_id: 2
-  title: Rückenmassage
+  title: Nackenmassage
   description: Dringend notwendig manchmal
   amount: 3
   price_in_cents: 1990
@@ -26,8 +26,8 @@ wollknaeuel:
 katzenhaar:
   id: 4
   invoice_id: 2
-  title: Katzenhaar
-  description: Rausgewürgtes Katzenhaar
+  title: Dicke Katze
+  description: Mindestens sieben Kilo das Vieh
   amount: 3
   price_in_cents: 990
   tax: 19

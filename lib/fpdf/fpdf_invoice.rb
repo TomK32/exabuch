@@ -13,10 +13,8 @@ module FPDF_INVOICE
   # Invoice Footer
   def Footer
     SetDrawColor(0)
-    Line(5, 262, 205, 262)
-    SetXY(10, 267)
-    SetFontSize(8)
-    PrintAddress(@invoice.sender.address)
+    Line(5, 265, 205, 265)
+    PrintFooterAddress(@invoice.sender.address)
   end
 
   def AddPage(orientation='', invoice=nil)
@@ -25,6 +23,7 @@ module FPDF_INVOICE
     SetFont('vera')
     SetFillColor(210)
     @lh = 5
+    SetAutoPageBreak(true, 2*@lh)
     super(orientation)
   end
 
@@ -34,8 +33,11 @@ module FPDF_INVOICE
     Ln(15)
     SetFont('verab', '', 13)
     MyCell("Rechnung Nr. "+invoice.formated_number)
-    Ln(15)
     SetFont('vera', '', 10)
+    Ln(5)
+    SetX(10)
+    MyWrite(invoice.description)
+    Ln(15)
     #
     # Items
     data = []
@@ -116,6 +118,46 @@ module FPDF_INVOICE
     MyCell(address.country) if address.country?
   end
 
+  # we just use a table to print the address in the footer...
+  def PrintFooterAddress(address)
+    data = [
+      [
+        if address.company?: replace_UTF8(address.company) else '' end, 
+        if address.call_number?: "Tel "+replace_UTF8(address.call_number) else '' end,
+        "Bankverbindung:",
+        if address.tax_number?: "Steuernummer: "+replace_UTF8(address.tax_number) else '' end
+      ],
+      [
+        if address.title?: replace_UTF8(address.title+" "+address.name) else replace_UTF8(address.name) end,
+        if address.fax_number?: "Fax "+replace_UTF8(address.fax_number) else '' end,
+        if address.bank_name?: replace_UTF8(address.bank_name) else '' end,
+        ""
+      ],
+      [
+        if address.street?: replace_UTF8(address.street+" "+address.street_number) else '' end,
+        if address.email?: replace_UTF8(address.email) else '' end,
+        if address.bank_number?: "BLZ "+replace_UTF8(address.bank_number) else '' end,
+        ""
+      ],
+      [
+        if address.postcode && address.city?: replace_UTF8(address.postcode+" "+address.city) else '' end,
+        if address.website_url?: replace_UTF8(address.website_url) else '' end,
+        if address.account_number?: "KTO "+replace_UTF8(address.account_number) else '' end,
+        if address.iban?: "IBAN "+replace_UTF8(address.iban) else '' end
+      ]
+    ]
+    columns = [
+      {:title => nil},
+      {:title => nil},
+      {:title => nil},
+      {:title => nil}
+    ]
+    SetFontSize(8)
+    SetXY(10, -30)
+    SetDrawColor(255) # no border
+    table(data, columns, {:line_height => 5})
+  end
+  
   def add_body_text(invoice)
     MyWrite("Vielen Dank für Ihren Auftrag.\n\nBitte überweisen Sie den Gesamtbetrag von ")
     SetFont('verab')

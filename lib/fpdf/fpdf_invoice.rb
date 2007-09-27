@@ -126,7 +126,7 @@ module FPDF_INVOICE
         if address.company?: replace_UTF8(address.company) else '' end, 
         if address.call_number?: "Tel "+replace_UTF8(address.call_number) else '' end,
         "Bankverbindung:",
-        if address.tax_number?: "Steuernummer: "+replace_UTF8(address.tax_number) else '' end
+        if address.tax_number?: "Steuernr: "+replace_UTF8(address.tax_number) else '' end
       ],
       [
         if address.title?: replace_UTF8(address.title+" "+address.name) else replace_UTF8(address.name) end,
@@ -148,10 +148,10 @@ module FPDF_INVOICE
       ]
     ]
     columns = [
-      {:title => nil},
-      {:title => nil},
-      {:title => nil},
-      {:title => nil}
+      {:title => nil, :width => 47.5},
+      {:title => nil, :width => 47.5},
+      {:title => nil, :width => 40},
+      {:title => nil, :width => 55}
     ]
     SetFontSize(8)
     SetXY(10, -30)

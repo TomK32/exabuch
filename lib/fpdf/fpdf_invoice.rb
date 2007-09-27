@@ -5,8 +5,9 @@ module FPDF_INVOICE
   
   # Invoice Header
   def Header
-    Image('public/images/logo.png', 130, 13, 71)
-    Line(5, 35, 205, 35)
+    logo = 'public/images/logo.png'
+    Image(logo, 130, 13, 71) if File.exists?(logo)
+    if File.exists?(logo): Line(5, 35, 205, 35) else Line(5, 10, 205, 10) end
     SetY(40)
   end
 

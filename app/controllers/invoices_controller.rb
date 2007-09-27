@@ -58,7 +58,9 @@ class InvoicesController < ApplicationController
   # renders invoice for pdf-output
   def to_pdf
     @invoice  = Invoice.find(params[:id])
-    filename  = (@invoice.billing_date.to_s+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
+    # Here you can define your preferred filename of the generated invoice
+    #filename  = (@invoice.billing_date.to_s+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
+    filename  = (@invoice.formated_number+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
     send_data gen_invoice_pdf, :filename => filename, :type => "application/pdf"
   end
 
@@ -66,6 +68,7 @@ class InvoicesController < ApplicationController
 
   # generates PDF for given invoice
   # see /lib/fpdf/fpdf_invoice.rb + fpdf_table for details
+  # :TODO: Add Meta-Info from Invoice to PDF (Author etc.)
   def gen_invoice_pdf
     @pdf = FPDF.new
     @pdf.extend(FPDF_INVOICE)

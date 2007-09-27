@@ -20,6 +20,10 @@ module InvoicesHelper
     return "-"
   end
 
+  def items_column(record)
+    if record.items.size > 0 then record.items.size.to_s+" Stück" else "Keine" end
+  end
+
   def net_amount_column(record)
     to_currency(record.net_amount)
   end

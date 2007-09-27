@@ -61,7 +61,7 @@ module FPDF_INVOICE
       ["Endbetrag:", replace_UTF8(to_currency(invoice.gross_amount))]
     ]
     columns = [
-      {:title => nil, :width => 40},
+      {:title => nil, :width => 40, :aligment => 'R'},
       {:title => nil, :width => 25, :aligment => 'R'}
     ]
     Ln(3)
@@ -115,6 +115,7 @@ module FPDF_INVOICE
     MyCell(address.company) if address.company?
     if address.title?: MyCell(address.title+" "+address.name) else MyCell(address.name) end
     MyCell(address.street+" "+address.street_number) if address.street?
+    Ln(@lh)
     MyCell(address.postcode+" "+address.city) if address.postcode? && address.city?
     MyCell(address.country) if address.country?
   end

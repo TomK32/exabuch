@@ -13,6 +13,7 @@ class InvoicesController < ApplicationController
     config.action_links.add 'to_pdf', :label => 'PDF', :type => :record, :popup => true
     config.action_links.add 'index', :label => 'Adressen', :controller => "addresses", :page => true
     config.actions.swap :search, :live_search
+		config.list.sorting = { :number => :asc }
     # i18n
     config.live_search.link.label = "Suchen"
     config.columns[:payed].label = "Bezahlt"

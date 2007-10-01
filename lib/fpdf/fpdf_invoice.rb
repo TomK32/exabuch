@@ -152,9 +152,9 @@ module FPDF_INVOICE
       ]
     ]
     columns = [
-      {:title => nil, :width => 44},
       {:title => nil, :width => 46},
-      {:title => nil, :width => 37},
+      {:title => nil, :width => 46},
+      {:title => nil, :width => 35},
       {:title => nil, :width => 63}
     ]
     # output footer
@@ -165,7 +165,7 @@ module FPDF_INVOICE
   end
   
   def add_body_text(invoice)
-    MyWrite("Vielen Dank für Ihren Auftrag.\n\nBitte überweisen Sie den Gesamtbetrag von ")
+    MyWrite("Vielen Dank für Ihren Auftrag.\n\nFür die von uns erbrachten Leistungen erlauben wir uns, Ihnen o.g. Positionen in Rechnung zu stellen. Bitte überweisen Sie den Gesamtbetrag von ")
     SetFont('verab')
     MyWrite(to_currency(invoice.gross_amount))
     SetFont('vera')

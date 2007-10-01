@@ -17,6 +17,7 @@ horst_address:
   account_number: 77 33 11 99
   bank_name: Europäische Zentralbank
   bank_number: 610 433 838
+  iban: DE 055 48375345 584938574
 gabi_address:
   id: 2
   title: Frau
@@ -35,4 +36,4 @@ gabi_address:
   account_number: 33 66 15 99
   bank_name: Spaßkasse Buxtehude
   bank_number: 300 400 123
-  
+  iban: DE 055 48375345 584938574

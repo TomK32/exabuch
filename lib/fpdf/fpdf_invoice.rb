@@ -19,6 +19,7 @@ module FPDF_INVOICE
   end
 
   def AddPage(orientation='', invoice=nil)
+		raise "Invoices with multiple pages are not supported at the moment, sorry..." if !@invoice.nil?
     @invoice ||= invoice
     raise "Please provide valid Invoice Object to FPDF_INVOICE::AddPage" if invoice.nil? && @invoice.nil?
     SetFont('vera')
@@ -26,7 +27,7 @@ module FPDF_INVOICE
     @lh = 5 #lineheight
     @leftmargin = 20
     SetLeftMargin(@leftmargin)
-    SetAutoPageBreak(true, 2*@lh)
+    SetAutoPageBreak(true, @lh)
     super(orientation)
   end
 
@@ -48,7 +49,7 @@ module FPDF_INVOICE
       data << [item.amount.to_s.gsub('.', ','), replace_UTF8(item.title), replace_UTF8(to_currency(item.price)), replace_UTF8(to_currency(item.amount * item.price))]
     end
     columns = [
-      {:title => 'Menge', :bg_color => 1, :title_alignment => 'C', :aligment => 'C', :width => 20},
+      {:title => 'Std', :bg_color => 1, :title_alignment => 'C', :aligment => 'C', :width => 20},
       {:title => 'Bezeichnung', :bg_color => 1, :width => 110-@leftmargin},
       {:title => 'Einzelpreis', :bg_color => 1, :title_alignment => 'R', :aligment => 'R', :width => 35},
       {:title => 'Gesamtpreis', :bg_color => 1, :title_alignment => 'R', :aligment => 'R', :width => 35}
@@ -151,9 +152,9 @@ module FPDF_INVOICE
       ]
     ]
     columns = [
-      {:title => nil, :width => 47.5},
-      {:title => nil, :width => 45.5},
-      {:title => nil, :width => 34},
+      {:title => nil, :width => 44},
+      {:title => nil, :width => 46},
+      {:title => nil, :width => 37},
       {:title => nil, :width => 63}
     ]
     # output footer

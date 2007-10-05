@@ -7,6 +7,24 @@
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '1.2.3' unless defined? RAILS_GEM_VERSION
 
+# tar2rubyscript config                                                                                                                                           
+module Rails                                                                                                                                                      
+  class Configuration                                                                                                                                             
+    def database_configuration                                                                                                                                    
+      conf = YAML::load(ERB.new(IO.read(database_configuration_file)).result)                                                                                     
+      if defined?(TAR2RUBYSCRIPT)                                                                                                                                 
+        conf.each do |k, v|                                                                                                                                       
+          if v["adapter"] =~ /^sqlite3/                                                                                                                           
+            v["database"] = oldlocation(v["database"]) if v.include?("database")                                                                                  
+            v["dbfile"]   = oldlocation(v["dbfile"])   if v.include?("dbfile")                                                                                    
+          end                                                                                                                                                     
+        end                                                                                                                                                       
+      end                                                                                                                                                         
+      conf                                                                                                                                                        
+    end                                                                                                                                                           
+  end                                                                                                                                                             
+end
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 

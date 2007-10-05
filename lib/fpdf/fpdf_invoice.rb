@@ -5,7 +5,12 @@ module FPDF_INVOICE
   
   # Invoice Header
   def Header
-    logo = 'public/images/logo.png'
+    # are we running as standalone? change logopath
+    if defined?(TAR2RUBYSCRIPT) then                                                                                                                              
+      logo = oldlocation('images/logo.png')                                                                                                                       
+    else                                                                                                                                                          
+      logo = 'public/images/logo.png'                                                                                                                             
+    end
     Image(logo, 130, 13, 71) if File.exists?(logo)
     if File.exists?(logo): Line(@leftmargin, 35, 200, 35) else Line(@leftmargin, 10, 200, 10) end
     SetY(40)

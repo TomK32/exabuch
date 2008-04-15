@@ -4,9 +4,13 @@ class Item < ActiveRecord::Base
   belongs_to :invoice
   validates_presence_of :tax
   
+  def tax_amount
+    self.price * self.tax/100.0
+  end
+
   def price
-    return self.price_in_cents/100.0 unless self.price_in_cents.nil?
-    return nil
+    return 0 if self.price_in_cents.nil?
+    return self.price_in_cents/100.0
   end
 
   def price=(val)

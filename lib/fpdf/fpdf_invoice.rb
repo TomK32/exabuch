@@ -63,11 +63,13 @@ module FPDF_INVOICE
     table(data, columns, {:line_height => 7})
     #
     # Sums
-    data = [
-      ["Zwischensumme:", replace_UTF8(to_currency(invoice.net_amount))],
-      ["zzgl. MwSt (#{invoice.tax_rate.to_s} %):", replace_UTF8(to_currency(invoice.tax_amount))],
-      ["Endbetrag:", replace_UTF8(to_currency(invoice.gross_amount))]
-    ]
+    data = []
+    data << ["Zwischensumme:", replace_UTF8(to_currency(invoice.net_amount))]
+    invoice.tax_rates.each do |tax_rate, tax_amount|
+      data << ["zzgl. MwSt (%s%%):" % tax_rate, replace_UTF8(to_currency(tax_amount))]
+    end
+    data << ["Endbetrag:", replace_UTF8(to_currency(invoice.gross_amount))]
+    
     columns = [
       {:title => nil, :width => 40, :aligment => 'R'},
       {:title => nil, :width => 25, :aligment => 'R'}

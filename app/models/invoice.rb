@@ -14,15 +14,16 @@ class Invoice < ActiveRecord::Base
     self.gross_amount - self.net_amount
   end
 
-  def tax_rate
+  def tax_rates
     # currently checks if all items have the same tax-rate
     # and returns that - throws error if tax-rates are mixed,
     # what is used in PDF-Generation
-    tax_rate = self.items[0].tax || 0
+    tax_rates = {}
     self.items.each do |item|
-      if item.tax != tax_rate then raise "The Tax-Rates of your Items differ, which is not supported yet. Sorry..." end
+      tax_rates[item.tax] ||= 0 
+      tax_rates[item.tax] += (item.price * item.amount * item.tax / 100.0)
     end
-    tax_rate
+    tax_rates
   end
   
   def net_amount

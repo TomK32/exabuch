@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     config.columns[:title].label = "Titel"
     config.columns[:description].label = "Beschreibung"
     config.columns[:price].label = "Nettopreis"
-    config.columns[:tax].label = "Steuersatz"
+    config.columns[:tax].label = "Umsatzsteuer"
     config.actions.swap :search, :live_search
     # i18n
     config.live_search.link.label = "Suchen"

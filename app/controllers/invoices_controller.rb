@@ -9,7 +9,7 @@ class InvoicesController < ApplicationController
   
 	active_scaffold :invoice do |config|
     config.label = "Rechnungen"
-    config.columns = [:payed, :number, :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :title, :description, :items, :net_amount, :tax, :gross_amount]
+    config.columns = [:payed, :number, :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :title, :description, :items, :net_amount, :tax_amount, :gross_amount]
     config.action_links.add 'to_pdf', :label => 'PDF', :type => :record, :popup => true
     config.action_links.add 'index', :label => 'Adressen', :controller => "addresses", :page => true
     config.actions.swap :search, :live_search
@@ -28,10 +28,10 @@ class InvoicesController < ApplicationController
     config.columns[:description].label = "Beschreibung"
     config.columns[:items].label = "Einzelposten"
     config.columns[:net_amount].label = "Netto"
-    config.columns[:tax].label = "Mwst."
+    config.columns[:tax_amount].label = "Umsatzsteuer"
     config.columns[:gross_amount].label = "Brutto"
     # list
-    config.list.columns = [:number, :billing_date, :payment_date, :title, :items, :net_amount, :tax, :gross_amount]
+    config.list.columns = [:number, :billing_date, :payment_date, :title, :items, :net_amount, :tax_amount, :gross_amount]
     # create
     config.create.link.label = "Neue Rechnung"
     config.create.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :gross_amount

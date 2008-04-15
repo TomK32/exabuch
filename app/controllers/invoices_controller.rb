@@ -34,7 +34,7 @@ class InvoicesController < ApplicationController
     config.list.columns = [:number, :billing_date, :payment_date, :title, :items, :net_amount, :tax_amount, :gross_amount]
     # create
     config.create.link.label = "Neue Rechnung"
-    config.create.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :gross_amount
+    config.create.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :tax_amount, :gross_amount
     config.create.columns.add_subgroup "Daten" do |dates_group|
       dates_group.add :order_date, :billing_date, :shipping_date, :payment_date
     end
@@ -43,7 +43,7 @@ class InvoicesController < ApplicationController
     end
     # update
     config.update.link.label = "Ändern"
-    config.update.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :gross_amount
+    config.update.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :tax_amount, :gross_amount
     config.update.columns.add_subgroup "Daten" do |dates_group|
       dates_group.add :order_date, :billing_date, :shipping_date, :payment_date
     end

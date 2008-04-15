@@ -7,6 +7,8 @@ class Invoice < ActiveRecord::Base
   #has_many :addresses, :through => :address_mappings
   validates_presence_of :number, :title
   validates_uniqueness_of :number
+  validates_presence_of :sender
+  validates_presence_of :receiver
 
   def tax_amount
     self.gross_amount - self.net_amount

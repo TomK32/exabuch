@@ -21,7 +21,7 @@ class Item < ActiveRecord::Base
   end
   
   def gross_amount
-    self.price * self.amount * self.tax / 100.0
+    self.price_amount + self.price_amount * self.tax / 100.0
   end
 
 end

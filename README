@@ -1,5 +1,6 @@
 == Welcome to Exabuch
-blabla
+Exabuch is a small book-keeping application in German. It's main purpose was creating
+invoices in a easy and fast manner and it's main audience are freelancers.
 
 == Installation
 You can download a tarball at github: http://github.com/TomK32/exabuch/tree/master

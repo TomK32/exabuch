@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
 
-  attr_accessor :price
+  attr_protected :invoice_id
+
   belongs_to :invoice
   validates_presence_of :tax
   

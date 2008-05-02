@@ -37,10 +37,10 @@
   <tr class="fullwidth">
     <td><%= f.label :sender_address_id, "Absender" %></td>
     <td><%= f.select :sender_address_id , current_user.user_addresses.collect{|address| [address.short_info, address.id]}, :include_blank => true %>
-      <br /><%= link_to 'Neue Adresse', new_address_path %></td>
+      <br /><%= link_to 'Neue Adresse', new_user_address_path(current_user), :target => '_blank' %></td>
     <td><%= f.label :receiver_address_id, "Empfänger" %></td>
     <td><%= f.select :receiver_address_id, current_user.addresses.collect{|address| [address.short_info, address.id]}, :include_blank => true %>
-      <br /><%= link_to 'Neuer Kunde', new_customer_path %></td>
+      <br /><%= link_to 'Neuer Kunde', new_customer_path, :target => '_blank' %></td>    
   </tr>
 </table>
 </fieldset>
@@ -53,7 +53,7 @@
     <th width="20%"><%= f.label :title, "Titel" %></th>
     <th width="50%"><%= f.label :description, "Beschreibung" %></th>
     <th width="10%"><%= f.label :amount, "Anzahl" %></th>
-    <th width="10%"><%= f.label :price, "Preis" %></th>
+    <th width="10%"><%= f.label :price, "Nettopreis" %></th>
     <th width="10%"><%= f.label :tax, "Steuersatz" %></th>
   </tr>
   <% @invoice.items.each do |item| %>
@@ -62,5 +62,5 @@
   <% end %>  
   <% end %>
 </table>
-  <%= link_to_remote "Neuer Artikel", :url => {:controller => '/items', :action => 'new'}, :method => :get %>
+  <%= link_to_remote "Neuer Artikel", :url => new_item_url, :method => :get %>
 </fieldset>

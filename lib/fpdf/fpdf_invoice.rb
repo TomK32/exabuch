@@ -20,7 +20,7 @@ module FPDF_INVOICE
   def Footer
     SetDrawColor(0)
     Line(@leftmargin, 265, 200, 265)
-    PrintFooterAddress(@invoice.sender.address)
+    PrintFooterAddress(@invoice.sender_address)
   end
 
   def AddPage(orientation='', invoice=nil)
@@ -38,7 +38,7 @@ module FPDF_INVOICE
 
   def BuildInvoice(invoice)
     SetFontSize(10)
-    PrintAddress(invoice.receiver.address)
+    PrintAddress(invoice.receiver_address)
     Ln(15)
     SetFont('verab', '', 13)
     MyCell("Rechnung Nr. "+invoice.formated_number)

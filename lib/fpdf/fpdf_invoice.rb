@@ -108,7 +108,7 @@ module FPDF_INVOICE
   end
 
   def DateFormat(date)
-    date.strftime("%d.%m.%Y")
+    date.strftime("%d.%m.%Y") unless date.blank?
   end
 
   # workaround... fpdf doesn't do utf-8

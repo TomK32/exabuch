@@ -1,29 +1,74 @@
 class ItemsController < ApplicationController
+  def index
+    @items = Item.find :all
 
-  layout "frontend"
-	active_scaffold :item do |config|
-    config.label = "Einzelposten"
-    config.columns = [:amount, :title, :description, :price, :price_amount, :tax, :gross_amount]
-    config.columns[:amount].label = "Menge"
-    config.columns[:title].label = "Titel"
-    config.columns[:description].label = "Beschreibung"
-    config.columns[:price].label = "Einzelpreis"
-    config.columns[:price_amount].label = "Netto"
-    config.columns[:tax].label = "Umsatzsteuer"
-    config.columns[:gross_amount].label = "Brutto"
-    config.actions.swap :search, :live_search
-    # i18n
-    config.live_search.link.label = "Suchen"
-    # create
-    config.create.columns.exclude :price_amount, :gross_amount
-    config.create.link.label = "Neues Element"
-    # update
-    config.update.columns.exclude :price_amount, :gross_amount
-    config.update.link.label = "Ändern"
-    # delete
-    config.delete.link.label = "Löschen"
-    # show
-    config.show.link.label = "Zeigen"
-	end
-  
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @items }
+    end
+  end
+
+  def show
+    @item = Item.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @item }
+    end
+  end
+
+  def new
+    @item = Item.new
+
+    respond_to do |format|
+      format.js
+      format.html # new.html.erb
+      format.xml  { render :xml => @item }
+    end
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def create
+    @item = Item.new(params[:item])
+
+    respond_to do |format|
+      if @item.save
+        flash[:notice] = 'Item was successfully created.'
+        format.html { redirect_to(@item) }
+        format.xml  { render :xml => @item, :status => :created, :location => @item }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @item = Item.find(params[:id])
+
+    respond_to do |format|
+      if @item.update_attributes(params[:item])
+        flash[:notice] = 'Item was successfully updated.'
+        format.html { redirect_to(@item) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @item.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+
+    respond_to do |format|
+      format.js { render :nothing }
+      format.html { redirect_to(admin_items_url) }
+      format.xml  { head :ok }
+    end
+  end
 end

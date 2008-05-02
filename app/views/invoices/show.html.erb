@@ -1,0 +1,28 @@
+
+  <p>Rechnungsnummer: <br />
+    <%= @invoice.number %>
+  </p>
+
+  <p>Titel: <br />
+    <%= @invoice.title %>
+  </p>
+
+  <p><%= @invoice.payed? ? 'Bezahlt' : 'Offen' %>
+  </p>
+
+  <p>Zusätzlicher Text: <br />
+    <%= @invoice.description %>
+  </p>
+  
+  <p>Rechnungsdatum: <br />
+    <%= @invoice.billing_date %>
+  </p>
+
+  <p>Versanddatum: <br />
+    <%= @invoice.shipping_date %>
+  </p>
+
+  <p>Zahlungseingang: <br />
+    <%= @invoice.payment_date %>
+  </p>
+<%= link_to 'Bearbeiten', edit_invoice_path(@invoice) %>

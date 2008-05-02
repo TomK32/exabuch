@@ -1,13 +1,13 @@
 class Invoice < ActiveRecord::Base
 
 	has_many :items, :dependent => :destroy
-  belongs_to :sender_address, :class_name => "Address"
-  belongs_to :receiver_address, :class_name => "Address"
+  belongs_to :sender_address, :class_name => "Address", :foreign_key => 'sender_address_id'
+  belongs_to :receiver_address, :class_name => "Address", :foreign_key => 'receiver_address_id'
 
   validates_presence_of :number, :title
-  validates_uniqueness_of :number
-  validates_presence_of :sender
-  validates_presence_of :receiver
+  validates_uniqueness_of :number, :scope => :user_id
+  validates_presence_of :sender_address_id
+  validates_presence_of :receiver_address_id
   attr_protected :user_id
 
   def tax_amount

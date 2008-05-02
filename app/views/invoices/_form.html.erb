@@ -1,0 +1,66 @@
+<fieldset>
+  <legend>Rechnungsdaten</legend>
+<table class="form">
+  <tr>
+    <td><%= f.label :number, "Rechnungsnummer" %></td>
+    <td><%= f.text_field :number %></td>
+    <td><%= f.label :order_date, "Bestelldatum" %></td>
+    <td><%= f.text_field :order_date %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :title, "Titel" %></td>
+    <td><%= f.text_field :title %></td>
+    <td><%= f.label :billing_date, "Rechnungsdatum" %></td>
+    <td><%= f.text_field :billing_date %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :payed, "Bereits bezahlt?" %></td>
+    <td><%= f.check_box :payed %></td>
+    <td><%= f.label :shipping_date, "Lieferdatum" %></td>
+    <td><%= f.text_field :shipping_date %></td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <td><%= f.label :payment_date, 'Zahlungseingang' %></td>
+    <td><%= f.text_field :payment_date %></td>
+  </tr>
+  <tr class="fullwidth">
+    <td><%= f.label :description, "Zusätzlicher Text" %></td>
+    <td colspan="3"><%= f.text_area :description, :rows => 4 %></td>
+  </tr>
+</table>
+</fieldset>
+
+<fieldset>
+  <legend>Addressen</legend>
+<table class="form">
+  <tr class="fullwidth">
+    <td><%= f.label :sender_address_id, "Absender" %></td>
+    <td><%= f.select :sender_address_id , current_user.user_addresses.collect{|address| [address.short_info, address.id]}, :include_blank => true %>
+      <br /><%= link_to 'Neue Adresse', new_address_path %></td>
+    <td><%= f.label :receiver_address_id, "Empfänger" %></td>
+    <td><%= f.select :receiver_address_id, current_user.addresses.collect{|address| [address.short_info, address.id]}, :include_blank => true %>
+      <br /><%= link_to 'Neuer Kunde', new_customer_path %></td>
+  </tr>
+</table>
+</fieldset>
+
+<fieldset>
+  <legend>Einzelposten</legend>
+<table id="invoice_items" class="form">
+  <tr>
+    <td></td>
+    <th width="20%"><%= f.label :title, "Titel" %></th>
+    <th width="50%"><%= f.label :description, "Beschreibung" %></th>
+    <th width="10%"><%= f.label :amount, "Anzahl" %></th>
+    <th width="10%"><%= f.label :price, "Preis" %></th>
+    <th width="10%"><%= f.label :tax, "Steuersatz" %></th>
+  </tr>
+  <% @invoice.items.each do |item| %>
+  <% fields_for 'items[]', item do |fitem| %>
+    <%= render :partial => '/items/form', :locals => {:f => fitem, :item => item} %>
+  <% end %>  
+  <% end %>
+</table>
+  <%= link_to_remote "Neuer Artikel", :url => {:controller => '/items', :action => 'new'}, :method => :get %>
+</fieldset>

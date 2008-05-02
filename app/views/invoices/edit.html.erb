@@ -1,0 +1,8 @@
+<% @page_title = 'Rechnung bearbeiten' %>
+
+<%= error_messages_for :invoice %>
+
+<% form_for :invoice, @invoice, :url => invoice_url(@invoice), :html => {:method => :put} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+    <%= submit_tag 'Speichern' %>
+<% end %>

@@ -5,60 +5,93 @@ class InvoicesController < ApplicationController
   load 'fpdf_invoice.rb'
   require 'iconv'
   
-  layout "frontend"
+  def index
+    @invoices = current_user.invoices.find :all, :include => [:receiver_address, :sender_address]
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @invoices }
+    end
+  end
+
+  def show
+    @invoice = current_user.invoices.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @invoice }
+    end
+  end
+
+  def new
+    @invoice = current_user.invoices.new(:number => Invoice.count + 1, :billing_date => Date.today, :payment_date => Date.today)
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @invoice }
+    end
+  end
+
+  def edit
+    @invoice = current_user.invoices.find(params[:id])
+  end
+
+  def create
+    @invoice = current_user.invoices.new(params[:invoice])
+    
+    params[:items].each do |item|
+      @invoice.items.new(item)
+    end
+
+    respond_to do |format|
+      if @invoice.save
+        flash[:notice] = 'Invoice was successfully created.'
+        format.html { redirect_to(@invoice) }
+        format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
+      else
+        flash[:error] = "Rechnung konnte nicht erstellt werden"
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @invoice = current_user.invoices.find(params[:id])
+    params[:items].each do |item_id, item_attributes|
+      item = @invoice.items.find_by_id(item_id)
+      if item
+        item.update_attributes(item_attributes)
+      else
+        @invoice.items.create(item_attributes)
+      end
+    end
+
+    respond_to do |format|
+      if @invoice.update_attributes(params[:invoice])
+        flash[:notice] = 'Invoice was successfully updated.'
+        format.html { redirect_to(@invoice) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @invoice = current_user.invoices.find(params[:id])
+    @invoice.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(admin_invoices_url) }
+      format.xml  { head :ok }
+    end
+  end
   
-	active_scaffold :invoice do |config|
-    config.label = "Rechnungen"
-    config.columns = [:payed, :number, :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :title, :description, :items, :net_amount, :tax_amount, :gross_amount]
-    config.action_links.add 'to_pdf', :label => 'PDF', :type => :record, :popup => true
-    config.action_links.add 'index', :label => 'Adressen', :controller => "addresses", :page => true
-    config.actions.swap :search, :live_search
-		config.list.sorting = { :number => :asc }
-    # i18n
-    config.live_search.link.label = "Suchen"
-    config.columns[:payed].label = "Bezahlt"
-    config.columns[:number].label = "Nummer"
-    config.columns[:sender].label = "Absender"
-    config.columns[:receiver].label = "Empfänger"
-    config.columns[:order_date].label = "Bestelldatum"
-    config.columns[:billing_date].label = "Rechnungsdatum"
-    config.columns[:shipping_date].label = "Lieferdatum"
-    config.columns[:payment_date].label = "Zahlungsdatum"
-    config.columns[:title].label = "Titel"
-    config.columns[:description].label = "Beschreibung"
-    config.columns[:items].label = "Einzelposten"
-    config.columns[:net_amount].label = "Netto"
-    config.columns[:tax_amount].label = "Umsatzsteuer"
-    config.columns[:gross_amount].label = "Brutto"
-    # list
-    config.list.columns = [:number, :billing_date, :payment_date, :title, :items, :net_amount, :tax_amount, :gross_amount]
-    # create
-    config.create.link.label = "Neue Rechnung"
-    config.create.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :tax_amount, :gross_amount
-    config.create.columns.add_subgroup "Daten" do |dates_group|
-      dates_group.add :order_date, :billing_date, :shipping_date, :payment_date
-    end
-    config.create.columns.add_subgroup "Adressen" do |address_group|
-      address_group.add :sender, :receiver
-    end
-    # update
-    config.update.link.label = "Ändern"
-    config.update.columns.exclude :sender, :receiver, :order_date, :billing_date, :shipping_date, :payment_date, :net_amount, :tax, :tax_amount, :gross_amount
-    config.update.columns.add_subgroup "Daten" do |dates_group|
-      dates_group.add :order_date, :billing_date, :shipping_date, :payment_date
-    end
-    config.update.columns.add_subgroup "Adressen" do |address_group|
-      address_group.add :sender, :receiver
-    end
-    # delete
-    config.delete.link.label = "Löschen"
-    # show
-    config.show.link.label = "Zeigen"
-	end
 
   # renders invoice for pdf-output
-  def to_pdf
-    @invoice  = Invoice.find(params[:id])
+  def pdf
+    @invoice  = current_user.invoices.find(params[:id])
     # Here you can define your preferred filename of the generated invoice
     #filename  = (@invoice.billing_date.to_s+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
     filename  = (@invoice.formated_number+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")

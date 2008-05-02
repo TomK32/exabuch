@@ -1,39 +1,73 @@
 class AddressesController < ApplicationController
+  def index
+    @addresses = Address.find :all
 
-  layout "frontend"
-	active_scaffold :address do |config|
-    config.columns = [:company, :title, :name, :street, :street_number, :postcode, :city, :country,  :call_number, :fax_number, :email, :website_url, :tax_number, :account_number, :iban, :bank_number, :bank_name]
-    config.label = "Adressen"
-    config.action_links.add 'index', :label => 'Rechnungen', :controller => "invoices", :page => true
-    config.actions.swap :search, :live_search
-    config.columns[:company].label = "Firma"
-    config.columns[:title].label = "Anrede"
-    config.columns[:name].label = "Name"
-    config.columns[:street].label = "Straße"
-    config.columns[:street_number].label = "Hausnummer"
-    config.columns[:postcode].label = "PLZ"
-    config.columns[:city].label = "Stadt"
-    config.columns[:country].label = "Land"
-    config.columns[:call_number].label = "Telefon"
-    config.columns[:fax_number].label = "Fax"
-    config.columns[:email].label = "E-Mail"
-    config.columns[:website_url].label = "Webseite"
-    config.columns[:tax_number].label = "Steuernummer"
-    config.columns[:account_number].label = "KTO"
-    config.columns[:bank_number].label = "BLZ"
-    config.columns[:bank_name].label = "Bank"
-    # i18n
-    config.live_search.link.label = "Suchen"
-    # create
-    config.create.link.label = "Neue Adresse"
-    # update
-    config.update.link.label = "Ändern"
-    # delete
-    config.delete.link.label = "Löschen"
-    # show
-    config.show.link.label = "Zeigen"
-    # list
-    config.list.columns = [:company, :title, :name, :email, :postcode, :city]
-	end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @addresses }
+    end
+  end
+
+  def show
+    @address = Address.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @address }
+    end
+  end
+
+  def new
+    @address = Address.new(params[:address])
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @address }
+    end
+  end
+
+  def edit
+    @address = Address.find(params[:id])
+  end
+
+  def create
+    @address = Address.new(params[:address])
+
+    respond_to do |format|
+      if @address.save
+        flash[:notice] = 'Address was successfully created.'
+        format.html { redirect_to(@address) }
+        format.xml  { render :xml => @address, :status => :created, :location => @address }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @address = Address.find(params[:id])
+
+    respond_to do |format|
+      if @address.update_attributes(params[:address])
+        flash[:notice] = 'Address was successfully updated.'
+        format.html { redirect_to(@address) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @address = Address.find(params[:id])
+    @address.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(admin_addresses_url) }
+      format.xml  { head :ok }
+    end
+  end
   
 end

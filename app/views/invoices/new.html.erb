@@ -1,0 +1,7 @@
+<% @page_title = 'Neue Rechnung erstellen' %>
+
+<%= error_messages_for :invoice %>
+<% form_for :invoice, @invoice, :url => invoices_url, :html => {:method => :post} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= submit_tag 'Speichern' %>
+<% end %>

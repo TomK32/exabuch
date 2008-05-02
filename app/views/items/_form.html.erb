@@ -1,0 +1,8 @@
+<tr class="fullwidth" id="invoice_item_<%= item.id %>">
+  <td><%= link_to_remote 'Löschen', :url => invoice_item_url(@invoice, item), :method => :delete, :confirm => 'Wollen sie den Einzelposten wirklich löschen?', :after => "$('invoice_item_#{item.id}').remove()" %></td>
+  <td><%= f.text_field :title %></td>
+  <td><%= f.text_field :description %></td>
+  <td><%= f.text_field :amount %></td>
+  <td><%= f.text_field :price %></td>
+  <td><%= f.text_field :tax %></td>
+</tr>

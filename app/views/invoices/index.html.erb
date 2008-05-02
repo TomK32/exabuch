@@ -1,0 +1,15 @@
+<% @page_title = 'Rechnungen' %>
+
+<%= link_to 'neue Rechnung erstellen', new_invoice_path %>
+<table id="invoices">
+  <tr>
+    <th>#</th>
+    <th>Status</th>
+    <th>Titel</th>
+    <th>Rechnungsdatum</th>
+    <th>Kunde</th>
+    <th>Rechnungsbetrag</th>
+    <th>Aktionen</th>
+  </tr>
+  <%= render :partial => 'invoice', :collection => @invoices %>
+</table>

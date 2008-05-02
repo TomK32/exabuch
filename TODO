@@ -1,7 +1,7 @@
 
 * multi-user (goldberg)
-* default address for sender
 * Umsatzsteuerbefreiung für Kleinunternehmer
 * upload of logo
-* other invoice templates (maybe design a DSL)
+* other invoice pdf templates (maybe design a DSL, use textile)
+* auto_complete_for customer in invoice form (should save lots of sql load)
 

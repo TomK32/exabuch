@@ -43,6 +43,7 @@ module Fpdf
         check_page_break(h)
         first = true
         row.each_index do |i|
+          next if row[i].nil?
           aligment = columns[i][:aligment] || "L"
           if options[:x_pos] && first == true then
             x = options[:x_pos]
@@ -76,6 +77,7 @@ module Fpdf
     end
     
     def nb_lines(width, text)
+      text = "" if text.nil?
       cw = @CurrentFont['cw']
       width = @w - @rMargin - @x  if (width == 0)
       wmax = (width - 2 * @cMargin) * 1000 / @FontSize

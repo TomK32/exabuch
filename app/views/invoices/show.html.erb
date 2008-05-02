@@ -1,28 +1,58 @@
+<fieldset>
+  <legend>Rechnungsdaten</legend>
+<table class="form">
+  <tr>
+    <td>Rechnungsnummer</td>
+    <td><%= @invoice.number %></td>
+    <td>Bestelldatum</td>
+    <td><%= @invoice.order_date %></td>
+  </tr>
+  <tr>
+    <td>Titel</td>
+    <td><%= @invoice.title %></td>
+    <td>Rechnungsdatum</td>
+    <td><%= @invoice.billing_date %></td>
+  </tr>
+  <tr>
+    <td>Bereits bezahlt?</td>
+    <td><%= @invoice.payed %></td>
+    <td>Lieferdatum</td>
+    <td><%= @invoice.shipping_date %></td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <td>Zahlungseingang</td>
+    <td><%= @invoice.payment_date %></td>
+  </tr>
+  <tr class="fullwidth">
+    <td>Zusätzlicher Text</td>
+    <td colspan="3"><%= @invoice.description %></td>
+  </tr>
+</table>
+</fieldset>
 
-  <p>Rechnungsnummer: <br />
-    <%= @invoice.number %>
-  </p>
+<fieldset>
+  <legend>Addressen</legend>
+<table class="form">
+  <tr class="fullwidth">
+    <td>Absender</td>
+    <td><%= @invoice.sender_address.short_info %>
+    <td>Empfänger</td>
+    <td><%= @invoice.receiver_address.short_info %>
+  </tr>
+</table>
+</fieldset>
 
-  <p>Titel: <br />
-    <%= @invoice.title %>
-  </p>
-
-  <p><%= @invoice.payed? ? 'Bezahlt' : 'Offen' %>
-  </p>
-
-  <p>Zusätzlicher Text: <br />
-    <%= @invoice.description %>
-  </p>
-  
-  <p>Rechnungsdatum: <br />
-    <%= @invoice.billing_date %>
-  </p>
-
-  <p>Versanddatum: <br />
-    <%= @invoice.shipping_date %>
-  </p>
-
-  <p>Zahlungseingang: <br />
-    <%= @invoice.payment_date %>
-  </p>
-<%= link_to 'Bearbeiten', edit_invoice_path(@invoice) %>
+<fieldset>
+  <legend>Einzelposten</legend>
+<table id="invoice_items" class="form">
+  <tr>
+    <th width="20%">Titel</th>
+    <th width="50%">Beschreibung</th>
+    <th width="10%">Anzahl</th>
+    <th width="10%">Preis</th>
+    <th width="10%">Steuersatz</th>
+  </tr>
+  <%= render :partial => '/items/item', :collection => @invoice.items %>
+</table>
+</fieldset>

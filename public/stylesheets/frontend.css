@@ -1,18 +1,16 @@
-/* Exabuch Styles */
-
-body, div, p, h1 {
-  margin: 0;
-  padding: 0;
-}
 
 body {
+	margin: 0;
+	padding: 0;
   background: url("../images/body_bg.png") #fff repeat-x;
+	font: x-small sans-serif;
 }
 
 #main {
   background: #f4f4f4;
   margin: 0 auto;
   width: 90%;
+	font-size: 130%;
 }
 
 #header {
@@ -21,12 +19,10 @@ body {
 }
 
 #header h1 {
-  font-size: 25px;
   padding: 60px 0 0 20px;
 }
 
 #header p {
-  font-size: 12px;
   padding-left: 20px;
 }
 
@@ -38,7 +34,6 @@ body {
 #copyright,
 #copyright a {
   color: #999;
-  font-size: 11px;
   padding: 0.5em 0;
   text-decoration: none;
 }
@@ -47,18 +42,87 @@ body {
   text-align: center;
 }
 
-/* ActiveScaffold */
-.items-column,
-.tax-column {
-  width: 10%;
+/*** general tags ***/
+h1, h2, h3, h4, h5 {
+	margin: 0 0 0.2em 0;
+	padding: 0;
+}
+p {
+	padding: 0;
+	margin: 0;
+}
+a img {
+	border: none;
+}
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+table {
+	  border-collapse: collapse;
+}
+tr.odd td {
+	background-color: #DDEEFF;
+}
+tr.even td {
+	background-color: white;
+}
+th {
+	background-color: #555555;
+	color: white;
+	font-size: 95%;
+	padding: 2px 5px;
+	text-align: left;
+}
+th.active {
+	background-color: #333333;
+}
+td {
+	padding: 5px 4px;
+	border: 1px #BBCCDD solid;
+}
+#invoices {
+	width: 100%;
 }
 
-.number-column,
-.billing_date-column,
-.payment_date-column {
-  width: 1%;
+form {
+	background-color: #DAFFCD;
+	padding: 2px;
+}
+fieldset {
+	border: 1px solid #7FCF00;
+	margin: 3px;
+}
+legend {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+table.form {
+	width: 100%;
+}
+table.form td { 
+	border: none; 
+	width: 22%;
+	vertical-align: text-top;
+}
+table#invoice_items td {
+	width: auto;
 }
 
-.items-column {
-  text-align: center;
+table.form tr.fullwidth textarea, table.form tr.fullwidth select, table.form tr.fullwidth input { 
+	width: 100%; 
+	margin: 0; 
+	padding: 0;
+}
+
+/* navigation */
+#navigation {
+	margin: 5px 0;
+	padding: 0;
+}
+#navigation li {
+	display: inline;
+	font-weight: bold;
+	background-color: #DAFFCD;
+	padding: 5px;
 }

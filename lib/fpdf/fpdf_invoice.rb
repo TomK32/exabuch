@@ -181,7 +181,8 @@ module FPDF_INVOICE
     MyWrite(invoice.formated_number)
     SetFont('vera')
     MyWrite(" ein.\n\n")
-    MyWrite("Mit freundlichen Grüßen,\nIhr Exanto Team")
+    MyWrite("Mit freundlichen Grüßen,\nIhr ")
+    MyWrite(invoice.sender_address.name)
   end
   
 end

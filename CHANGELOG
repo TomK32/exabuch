@@ -1,0 +1,12 @@
+
+May 2008
+* dropped ActiveScaffold for custom forms and views
+
+
+April 2008
+* dropped address_mapping model
+* added a default user which will come handy when adding multi-user functionality
+* fixed some small bugs like mixed tax-rates
+* migrated to rails 2.0 
+* moved development to github: http://github.com/TomK32/exabuch/tree/master
+* under new management of Thomas R. "TomK32" Koll, <tomk32@gmx.de>

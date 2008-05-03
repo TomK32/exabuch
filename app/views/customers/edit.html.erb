@@ -1,0 +1,8 @@
+<% @page_title = 'Neuen Kunden anlegen' %>
+
+<%= error_messages_for :customer %>
+<% form_for :customer, @customer, :url => customers_url, :html => {:method => :post} do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+
+<%= submit_tag 'Speichern' %>
+<% end %>

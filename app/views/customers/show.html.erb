@@ -1,0 +1,17 @@
+<% @page_title = 'Kunde %s ' % @customer.name %>
+
+<h3>Adressen</h3>
+  <%= link_to 'Neue Adresse anlegen', new_customer_address_url(@customer) %>
+<% if @customer.addresses.nil? %>
+  <p>Noch keine Adressen vorhanden</p>
+<% else %>
+<table class="form">
+  <tr>
+    <th width="20%">Firmenname</th>
+    <th width="20%">Ansprechperson</th>
+    <th width="50%">Adresse</th>
+    <th width="10%">Steuernummer</th>
+  </tr>
+  <%= render :partial => 'address', :collection => @customer.addresses %>
+</table>
+<% end %>

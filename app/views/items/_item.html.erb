@@ -1,7 +1,9 @@
-<tr class="fullwidth" id="invoice_item_<%= item.id %>">
+<tr class="fullwidth" id="invoice_item_<%= item.id %>" class="<%= cycle 'odd', 'even' %>">
   <td><%= item.title %></td>
   <td><%= item.description %></td>
   <td><%= item.amount %></td>
-  <td><%= item.price %></td>
-  <td><%= item.tax %></td>
+  <td><%= number_to_euro item.price %></td>
+  <td><%= number_to_euro item.tax_amount %></td>
+  <td><%= number_to_euro item.gross_amount %></td>
+  <td><%= "%s%%" % item.tax %></td>
 </tr>

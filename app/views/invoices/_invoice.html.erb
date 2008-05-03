@@ -1,6 +1,7 @@
 <tr id="invoice-<%= invoice.id %>" class="<%= cycle 'odd', 'even' %>">
   <td><%= invoice.number %></td>
-  <td><%= invoice.payed ? 'bezahlt' : 'offen' %></td>
+  <td><%= invoice.billing_date %></td>
+  <td><%= invoice.payed ? invoice.payment_date : 'offen' %></td>
   <td><%= invoice.title %></td>
   <td><%= invoice.billing_date %></td>
   <td><%= invoice.receiver_address.company %></td>

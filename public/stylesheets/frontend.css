@@ -43,10 +43,16 @@ body {
 }
 
 /*** general tags ***/
-h1, h2, h3, h4, h5 {
-	margin: 0 0 0.2em 0;
+h1 {
+	margin: 0;
 	padding: 0;
 }
+h2, h3, h4, h5 {
+	margin: 0.5em 0 0.2em 0;
+	padding: 0;
+	color: #4F8F00;
+}
+
 p {
 	padding: 0;
 	margin: 0;
@@ -97,7 +103,7 @@ legend {
 	font-weight: bold;
 	font-size: 1.2em;
 }
-table.form {
+table.form, table.show {
 	width: 100%;
 }
 table.form td { 
@@ -115,6 +121,16 @@ table.form tr.fullwidth textarea, table.form tr.fullwidth select, table.form tr.
 	padding: 0;
 }
 
+/* displaying an invoice */
+table.show th {
+	background: none;
+	color: black;
+	border-bottom: 1px black dotted;
+}
+
+table.show td {
+	border: none;
+}
 /* navigation */
 #navigation {
 	margin: 5px 0;

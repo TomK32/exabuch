@@ -24,7 +24,7 @@ class InvoicesController < ApplicationController
   end
 
   def new
-    @invoice = current_user.invoices.new(:number => Invoice.count + 1, :billing_date => Date.today, :payment_date => Date.today)
+    @invoice = current_user.invoices.new(:number => Invoice.count + 1, :billing_date => Date.today)
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @invoice }

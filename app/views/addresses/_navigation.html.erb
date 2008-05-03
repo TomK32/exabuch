@@ -1,0 +1,5 @@
+<% if params[:customer_id] %>
+  <%= link_to_unless_current 'neue Adresse', new_customer_address_path(:customer_id => params[:customer_id]) %>
+<% else %>
+  <%= link_to_unless_current 'neue Adresse', new_address_path %>
+<% end %>

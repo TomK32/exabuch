@@ -1,8 +1,13 @@
 class AddressesController < ApplicationController
   def index
-    @addresses = Address.find :all
+    if params[:customer_id]
+      @addresses = current_user.customers.find(params[:customer_id], :include => :addresses).addresses
+    else
+      @addresses = current_user.addresses
+    end
 
     respond_to do |format|
+      format.js
       format.html # index.html.erb
       format.xml  { render :xml => @addresses }
     end
@@ -18,9 +23,9 @@ class AddressesController < ApplicationController
   end
 
   def new
-    @address = Address.new(params[:address])
-
+    @address = Address.new
     respond_to do |format|
+      format.js
       format.html # new.html.erb
       format.xml  { render :xml => @address }
     end
@@ -31,7 +36,11 @@ class AddressesController < ApplicationController
   end
 
   def create
-    @address = Address.new(params[:address])
+    if params[:customer_id]
+      @address = current_user.customers.find(params[:customer_id]).addresses.new
+    else
+      @address = current_user.addresses.new(params[:address])
+    end
 
     respond_to do |format|
       if @address.save

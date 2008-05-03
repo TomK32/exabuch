@@ -9,6 +9,11 @@ class Invoice < ActiveRecord::Base
   validates_presence_of :sender_address_id
   validates_presence_of :receiver_address_id
   attr_protected :user_id
+  validates_presence_of :payment_date, :if => Proc.new{|invoice| invoice.payed? }
+  
+  def validate
+    errors.add(:payed, 'must be true if payment date is set') unless payed == true or payment_date.nil?
+  end
 
   def tax_amount
     self.gross_amount - self.net_amount

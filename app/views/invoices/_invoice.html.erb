@@ -3,9 +3,9 @@
   <td><%= invoice.billing_date %></td>
   <td><%= invoice.payed ? invoice.payment_date : 'offen' %></td>
   <td><%= invoice.title %></td>
-  <td><%= invoice.billing_date %></td>
   <td><%= invoice.receiver_address.company %></td>
-  <td><%= "%.2f" % invoice.gross_amount %></td>
+  <td><%= number_to_euro(invoice.gross_amount) %></td>
+  <td><%= number_to_euro(invoice.tax_amount) %></td>
   <td><%= link_to "ändern", edit_invoice_path(invoice) %>
     <%= link_to "zeigen", invoice_path(invoice) %> <%= link_to "PDF", pdf_invoice_path(invoice) %></td>
 </tr>

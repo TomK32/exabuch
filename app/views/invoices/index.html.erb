@@ -3,11 +3,12 @@
 <table id="invoices">
   <tr>
     <th>#</th>
+    <th>Rechnungsdatum</th>
     <th>Status</th>
     <th>Titel</th>
-    <th>Rechnungsdatum</th>
     <th>Kunde</th>
-    <th>Rechnungsbetrag</th>
+    <th>Bruttobetrag</th>
+    <th>Steueranteil</th>
     <th>Aktionen</th>
   </tr>
   <%= render :partial => 'invoice', :collection => @invoices %>

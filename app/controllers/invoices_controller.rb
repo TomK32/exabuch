@@ -6,8 +6,11 @@ class InvoicesController < ApplicationController
   require 'iconv'
   
   def index
-    @invoices = current_user.invoices.find :all, :include => [:receiver_address, :sender_address]
-
+    if params[:search]
+      @invoices = current_user.invoices.find :all, :conditions => ['title LIKE ?', "%#{params[:search]}%"]
+    else
+      @invoices = current_user.invoices.find :all, :include => [:receiver_address]
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @invoices }
@@ -37,9 +40,12 @@ class InvoicesController < ApplicationController
 
   def create
     @invoice = current_user.invoices.new(params[:invoice])
-    
-    params[:items].each do |item|
-      @invoice.items.new(item)
+    if params[:items].nil?
+      flash[:error] = "Es wurden keine Rechnungsposten angegeben"
+      render :action => :new and return
+    end
+    params[:items].each do |item_id, item_attributes|
+      @invoice.items.new(item_attributes)
     end
 
     respond_to do |format|
@@ -49,7 +55,7 @@ class InvoicesController < ApplicationController
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
         flash[:error] = "Rechnung konnte nicht erstellt werden"
-        format.html { render :action => "new" }
+        format.html { render :action => "new" and return }
         format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
       end
     end

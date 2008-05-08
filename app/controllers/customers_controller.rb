@@ -1,14 +1,8 @@
 class CustomersController < ApplicationController
   def index
-    if params[:search]
-      @customers = current_user.customers.find :all, :conditions => ['name LIKE ?', "%#{params[:search]}%"]
-    else
-      unless read_fragment({:id => current_user.id})
-        @customers = current_user.customers.find :all
-      end
-    end
+    @customers = current_user.customers.find :all
+
     respond_to do |format|
-      format.js
       format.html # index.html.erb
       format.xml  { render :xml => @customers }
     end

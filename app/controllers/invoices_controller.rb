@@ -21,6 +21,10 @@ class InvoicesController < ApplicationController
     @invoice = current_user.invoices.find(params[:id])
 
     respond_to do |format|
+      format.pdf do
+        filename  = (@invoice.formated_number+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
+        send_data gen_invoice_pdf, :filename => filename, :type => "application/pdf"
+      end
       format.html # show.html.erb
       format.xml  { render :xml => @invoice }
     end
@@ -45,7 +49,7 @@ class InvoicesController < ApplicationController
       render :action => :new and return
     end
     params[:items].each do |item_id, item_attributes|
-      @invoice.items.new(item_attributes)
+      @invoice.items.create(item_attributes)
     end
 
     respond_to do |format|
@@ -94,32 +98,21 @@ class InvoicesController < ApplicationController
     end
   end
   
-
-  # renders invoice for pdf-output
-  def pdf
-    @invoice  = current_user.invoices.find(params[:id])
-    # Here you can define your preferred filename of the generated invoice
-    #filename  = (@invoice.billing_date.to_s+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
-    filename  = (@invoice.formated_number+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
-    send_data gen_invoice_pdf, :filename => filename, :type => "application/pdf"
-  end
-
   private
-
   # generates PDF for given invoice
   # see /lib/fpdf/fpdf_invoice.rb + fpdf_table for details
   # :TODO: Add Meta-Info from Invoice to PDF (Author etc.)
   def gen_invoice_pdf
-    @pdf = FPDF.new
-    @pdf.extend(FPDF_INVOICE)
-    @pdf.extend(Fpdf::Table)
-    @pdf.extend(ApplicationHelper)
-    @pdf.extend(ActionView::Helpers::NumberHelper)
-    @pdf.AddFont('vera')
-    @pdf.AddFont('verab')
-    @pdf.AddPage('', @invoice)
-    @pdf.BuildInvoice(@invoice)
-    @pdf.Output
+    pdf = FPDF.new
+    pdf.extend(FPDF_INVOICE)
+    pdf.extend(Fpdf::Table)
+    pdf.extend(ApplicationHelper)
+    pdf.extend(ActionView::Helpers::NumberHelper)
+    pdf.AddFont('vera')
+    pdf.AddFont('verab')
+    pdf.AddPage('', @invoice)
+    pdf.BuildInvoice(@invoice)
+    pdf.Output
   end
 
 end

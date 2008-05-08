@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :customers, :has_many => :addresses
   map.resources :users, :has_many => :addresses
   map.resources :addresses
-  map.resources :invoices, :has_many => :items, :member => {:pdf => :get}
+  map.resources :invoices, :has_many => :items, :member => {:confirm_destroy => :get}
   map.resources :items
 
   map.root :controller => 'invoices'

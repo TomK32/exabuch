@@ -37,4 +37,12 @@ module ApplicationHelper
   def number_to_euro(amount)
     number_to_currency(amount, :unit => '€ ', :separator => ',', :delimiter => '.')
   end
+  
+  def link_to_destroy title, options={}, html_options={}
+    unless options.is_a?(String)
+      options = {:action=>'destroy'}.update(options)
+    end
+    html_options = {:confirm => 'Are you sure?', :method => :delete}.update(html_options)
+    link_to title, options, html_options
+  end
 end

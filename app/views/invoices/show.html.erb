@@ -1,58 +1,59 @@
-<fieldset>
-  <legend>Rechnungsdaten</legend>
-<table class="form">
+
+  <h3>Rechnungsdaten</h3>
+<table class="show">
   <tr>
-    <td>Rechnungsnummer</td>
+    <th>Rechnungsnummer</th>
     <td><%= @invoice.number %></td>
-    <td>Bestelldatum</td>
+    <th>Bestelldatum</th>
     <td><%= @invoice.order_date %></td>
   </tr>
   <tr>
-    <td>Titel</td>
+    <th>Titel</th>
     <td><%= @invoice.title %></td>
-    <td>Rechnungsdatum</td>
+    <th>Rechnungsdatum</th>
     <td><%= @invoice.billing_date %></td>
   </tr>
   <tr>
-    <td>Bereits bezahlt?</td>
+    <th>Bereits bezahlt?</th>
     <td><%= @invoice.payed %></td>
-    <td>Lieferdatum</td>
+    <th>Lieferdatum</th>
     <td><%= @invoice.shipping_date %></td>
   </tr>
   <tr>
     <td colspan="2"></td>
-    <td>Zahlungseingang</td>
+    <th>Zahlungseingang</th>
     <td><%= @invoice.payment_date %></td>
   </tr>
   <tr class="fullwidth">
-    <td>Zusätzlicher Text</td>
+    <th>Zusätzlicher Text</th>
     <td colspan="3"><%= @invoice.description %></td>
   </tr>
 </table>
-</fieldset>
 
-<fieldset>
-  <legend>Addressen</legend>
-<table class="form">
+
+<h3>Addressen</h3>
+<table class="show">
   <tr class="fullwidth">
-    <td>Absender</td>
+    <th>Absender</th>
     <td><%= @invoice.sender_address.short_info %>
-    <td>Empfänger</td>
+    <th>Empfänger</th>
     <td><%= @invoice.receiver_address.short_info %>
   </tr>
 </table>
-</fieldset>
 
-<fieldset>
-  <legend>Einzelposten</legend>
-<table id="invoice_items" class="form">
+
+
+  <h3>Einzelposten</h3>
+<table id="invoice_items" class="show">
   <tr>
     <th width="20%">Titel</th>
-    <th width="50%">Beschreibung</th>
-    <th width="10%">Anzahl</th>
-    <th width="10%">Preis</th>
-    <th width="10%">Steuersatz</th>
+    <th width="25%">Beschreibung</th>
+    <th width="7%">Anzahl</th>
+    <th width="7%">Preis</th>
+    <th width="7%">Steuern</th>
+    <th width="7%">Brutto</th>
+    <th width="7%">Steuersatz</th>
   </tr>
   <%= render :partial => '/items/item', :collection => @invoice.items %>
 </table>
-</fieldset>
+

@@ -1,4 +1,8 @@
+
+<div id="search">
 <% form_tag invoices_url, :method => :get do -%>
   <%= text_field_tag :search, params[:search] %>
+  <%= link_to 'x', invoices_url unless params[:search].nil? %>
   <%= submit_tag 'Suchen' %>
 <% end -%>
+</div>

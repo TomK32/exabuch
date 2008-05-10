@@ -49,7 +49,7 @@ class InvoicesController < ApplicationController
       render :action => :new and return
     end
     params[:items].each do |item_id, item_attributes|
-      @invoice.items.create(item_attributes)
+      @invoice.items << Item.new(item_attributes)
     end
 
     respond_to do |format|
@@ -59,6 +59,13 @@ class InvoicesController < ApplicationController
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
         flash[:error] = "Rechnung konnte nicht erstellt werden"
+        counter = Time.now.to_i
+        @invoice.items.each do |item|
+          # necessary to give each item a unique id and to have many of them in the form
+          item.id = counter+1
+          counter += 1
+        end
+        
         format.html { render :action => "new" and return }
         format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
       end
@@ -72,7 +79,7 @@ class InvoicesController < ApplicationController
       if item
         item.update_attributes(item_attributes)
       else
-        @invoice.items.create(item_attributes)
+        @invoice.items << @invoice.items.create(item_attributes)
       end
     end
 

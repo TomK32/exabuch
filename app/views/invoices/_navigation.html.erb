@@ -1,6 +1,6 @@
 <ul>
   <li><%= link_to_unless_current 'neue Rechnung', new_invoice_path %></li>
-<% unless @invoice.nil? %>
+<% unless @invoice.nil? or @invoice.new_record? %>
   <li><%= link_to_unless_current 'PDF', formatted_invoice_path(@invoice, :pdf) %></li>
 <% end %>
 </ul>

@@ -1,5 +1,7 @@
 class InvoicesController < ApplicationController
 
+  before_filter :current_invoice, :only => [:show, :edit, :destroy, :confirm_destroy, :update]
+
   require 'fpdf'
   load 'fpdf_table.rb'
   load 'fpdf_invoice.rb'
@@ -18,8 +20,6 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = current_user.invoices.find(params[:id])
-
     respond_to do |format|
       format.pdf do
         filename  = (@invoice.formated_number+"_"+@invoice.title+".pdf").downcase.gsub(" ", "_")
@@ -39,7 +39,6 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    @invoice = current_user.invoices.find(params[:id])
   end
 
   def create
@@ -73,7 +72,6 @@ class InvoicesController < ApplicationController
   end
 
   def update
-    @invoice = current_user.invoices.find(params[:id])
     params[:items].each do |item_id, item_attributes|
       item = @invoice.items.find_by_id(item_id)
       if item
@@ -96,9 +94,7 @@ class InvoicesController < ApplicationController
   end
 
   def destroy
-    @invoice = current_user.invoices.find(params[:id])
     @invoice.destroy
-
     respond_to do |format|
       format.html { redirect_to(invoices_path) }
       format.xml  { head :ok }
@@ -106,10 +102,19 @@ class InvoicesController < ApplicationController
   end
   
   def confirm_destroy
-    @invoice = current_user.invoices.find(params[:id])
   end
 
   private
+  def current_invoice
+    begin
+      @invoice = current_user.invoices.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      flash[:error] = "Rechnung wurde nicht gefunden"
+      redirect_to invoices_url and return
+    end
+    
+  end
+  
   # generates PDF for given invoice
   # see /lib/fpdf/fpdf_invoice.rb + fpdf_table for details
   # :TODO: Add Meta-Info from Invoice to PDF (Author etc.)

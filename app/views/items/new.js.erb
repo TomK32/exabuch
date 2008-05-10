@@ -1,8 +1,4 @@
-<% 
-# necessary to give each item a unique id and to have many of them in the form
-@item = Item.new()
-@item.id = Time.now.to_i
-fields_for 'items[]', @item do |f| 
+<% fields_for 'items[]', @item do |f| 
   update_page do |page| %>
     <%= page.insert_html :bottom, 'invoice_items', :partial => '/items/form', :locals => {:f => f, :item => @item} %><%
   end

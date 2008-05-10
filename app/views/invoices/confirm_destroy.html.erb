@@ -1,0 +1,8 @@
+<%= @page_title = 'Rechnung löschen' %>
+
+<%= form_tag invoice_path(@invoice), :method => :delete %>
+  <p>
+  Wollen Sie die Rechnung wirklich löschen?
+  </p>
+  <%= submit_tag 'Löschen' %> <%= link_to 'zurück zur Rechnung', :back %> 
+</form>

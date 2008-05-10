@@ -100,11 +100,15 @@ class InvoicesController < ApplicationController
     @invoice.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_invoices_url) }
+      format.html { redirect_to(invoices_path) }
       format.xml  { head :ok }
     end
   end
   
+  def confirm_destroy
+    @invoice = current_user.invoices.find(params[:id])
+  end
+
   private
   # generates PDF for given invoice
   # see /lib/fpdf/fpdf_invoice.rb + fpdf_table for details

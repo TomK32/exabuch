@@ -1,6 +1,6 @@
 class AlterAddresses < ActiveRecord::Migration
   def self.up
-    Adress.find(:all).each do |address|
+    Address.find(:all).each do |address|
       address.street = "%s %s" % [address.street, address.street_number]
     end
     rename_column :addresses, :call_number, :phone

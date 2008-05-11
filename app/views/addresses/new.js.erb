@@ -1,0 +1,9 @@
+<% 
+# necessary to give each item a unique id and to have many of them in the form
+@address = Item.new()
+@address.id = Time.now.to_i
+fields_for 'addresses[]', @address do |f| 
+  update_page do |page| %>
+    <%= page.insert_html :bottom, 'customer_addresses', :partial => 'form', :locals => {:f => f} %><%
+  end
+end %>

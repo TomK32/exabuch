@@ -9,27 +9,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "addresses", :force => true do |t|
     t.string  "company"
     t.string  "title"
     t.string  "name"
     t.string  "street"
-    t.string  "street_number"
     t.string  "postcode"
     t.string  "city"
     t.string  "country"
-    t.string  "call_number"
-    t.string  "fax_number"
+    t.string  "phone"
+    t.string  "fax"
     t.string  "email"
-    t.string  "website_url"
+    t.string  "website"
     t.string  "tax_number"
     t.string  "account_number"
     t.string  "iban"
     t.string  "bank_name"
     t.string  "bank_number"
-    t.integer "user_id",        :default => 1, :null => false
+    t.integer "user_id",        :default => 1,     :null => false
+    t.boolean "owner_by_user",  :default => false
+    t.boolean "owned_by_user",  :default => false
+    t.integer "customer_id"
+  end
+
+  create_table "customers", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "customer_id"
+    t.string   "name",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "invoices", :force => true do |t|

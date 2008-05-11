@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
     if params[:customer_id]
       @addresses = current_user.customers.find(params[:customer_id], :include => :addresses).addresses
     else
-      @addresses = current_user.addresses
+      @addresses = current_user.user_addresses
     end
 
     respond_to do |format|
@@ -74,7 +74,7 @@ class AddressesController < ApplicationController
     @address.destroy
 
     respond_to do |format|
-      format.html { redirect_to(admin_addresses_url) }
+      format.html { redirect_to(addresses_url) }
       format.xml  { head :ok }
     end
   end

@@ -1,0 +1,65 @@
+<fieldset>
+  <legend>Kontaktdaten</legend>
+<table class="form">
+  <tr>
+    <td>Firmenname</td>
+    <td><%= @address.company %></td>
+    <td>Telefonnummer</td>
+    <td><%= @address.phone %></td>    
+  </tr>
+  <tr>
+    <td>Anrede</td>
+    <td><%= @address.title %></td>
+    <td>Faxnummer</td>
+    <td><%= @address.fax %></td>
+  </tr>
+  <tr>
+    <td>Ansprechpartner</td>
+    <td><%= @address.name %></td>
+    <td>E-Mail</td>
+    <td><%= @address.email %></td>
+  </tr>
+  <tr>
+    <td>Steuernummer</td>
+    <td><%= @address.tax_number %></td>
+    <td>Website</td>
+    <td><%= @address.website %></td>
+  </tr>
+</table>
+</fieldset>
+
+<fieldset>
+  <legend>Addressdaten</legend>
+<table class="form">
+  <tr>
+    <td>Straße</td>
+    <td><%= @address.street %></td>
+    <td>Stadt</td>
+    <td><%= @address.city %></td>
+  </tr>
+  <tr>
+    <td>Postleitzahl</td>
+    <td><%= @address.postcode %></td>  
+    <td>Land</td>
+    <td><%= @address.country %></td>
+  </tr>
+</table>
+</fieldset>
+
+<fieldset>
+  <legend>Kontodaten</legend>
+<table class="form">
+  <tr>
+    <td>Kontonummer</td>
+    <td><%= @address.account_number %></td>
+    <td>IBAN</td>
+    <td><%= @address.iban %></td>
+  </tr>
+  <tr>
+    <td>Bankleitzahl</td>
+    <td><%= @address.bank_number %></td>
+    <td>Bankname</td>
+    <td><%= @address.bank_name %></td>
+  </tr>
+</table>
+</fieldset>

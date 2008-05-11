@@ -1,52 +1,65 @@
 <fieldset>
-  <legend>Adressdaten</legend>
+  <legend>Kontaktdaten</legend>
 <table class="form">
   <tr>
-    <td><%= f.label :name, "Firmenname" %></td>
-    <td><%= f.text_field :name %></td>
-    <td><%= f.label :call_number, "Telefonnummer" %></td>
-    <td><%= f.text_field :call_number %></td>    
+    <td><%= f.label :company, "Firmenname" %></td>
+    <td><%= f.text_field :company %></td>
+    <td><%= f.label :phone, "Telefonnummer" %></td>
+    <td><%= f.text_field :phone %></td>    
   </tr>
   <tr>
     <td><%= f.label :title, "Anrede" %></td>
     <td><%= f.text_field :title %></td>
-    <td><%= f.label :id, "Label Text" %></td>
-    <td><%= f.text_field :id %></td>
-    
+    <td><%= f.label :fax, "Faxnummer" %></td>
+    <td><%= f.text_field :fax %></td>
   </tr>
   <tr>
-    
+    <td><%= f.label :name, "Ansprechpartner" %></td>
+    <td><%= f.text_field :name %></td>
+    <td><%= f.label :email, "E-Mail" %></td>
+    <td><%= f.text_field :email %></td>
   </tr>
   <tr>
-    
-  </tr>
-  <tr>
-    
-  </tr>
-  <tr>
-    
+    <td><%= f.label :tax_number, "Steuernummer" %></td>
+    <td><%= f.text_field :tax_number %></td>
+    <td><%= f.label :website, "Website" %></td>
+    <td><%= f.text_field :website %></td>
   </tr>
 </table>
 </fieldset>
 
-  t.string  "company"
-  t.string  "title"
-  t.string  "name"
-  t.string  "street"
-  t.string  "street_number"
-  t.string  "postcode"
-  t.string  "city"
-  t.string  "country"
-  t.string  "call_number"
-  t.string  "fax_number"
-  t.string  "email"
-  t.string  "website_url"
-  t.string  "tax_number"
-  t.string  "account_number"
-  t.string  "iban"
-  t.string  "bank_name"
-  t.string  "bank_number"
-  t.integer "user_id",        :default => 1,     :null => false
-  t.boolean "owner_by_user",  :default => false
-  t.boolean "owned_by_user",  :default => false
-  t.integer "customer_id"
+<fieldset>
+  <legend>Addressdaten</legend>
+<table class="form">
+  <tr>
+    <td><%= f.label :street, "Straße" %></td>
+    <td><%= f.text_field :street %></td>
+    <td><%= f.label :city, "Stadt" %></td>
+    <td><%= f.text_field :city %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :postcode, "Postleitzahl" %></td>
+    <td><%= f.text_field :postcode %></td>  
+    <td><%= f.label :country, "Land" %></td>
+    <td><%= f.country_select :country, ['Deutschland', 'Österreich', 'Schweiz'] %></td>
+  </tr>
+</table>
+</fieldset>
+
+<fieldset>
+  <legend>Kontodaten</legend>
+<table class="form">
+  <tr>
+    <td><%= f.label :account_number, "Kontonummer" %></td>
+    <td><%= f.text_field :account_number %></td>
+    <td><%= f.label :iban, "IBAN" %></td>
+    <td><%= f.text_field :iban %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :bank_number, "Bankleitzahl" %></td>
+    <td><%= f.text_field :bank_number %></td>
+    <td><%= f.label :bank_name, "Bankname" %></td>
+    <td><%= f.text_field :bank_name %></td>
+  </tr>
+</table>
+</fieldset>

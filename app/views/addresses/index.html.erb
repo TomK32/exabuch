@@ -1,0 +1,12 @@
+<% @page_title = 'Adressen' %>
+
+<table id="addresses">
+  <tr>
+    <th width="20%">Firmenname</th>
+    <th width="20%">Ansprechperson</th>
+    <th width="40%">Adresse</th>
+    <th width="10%">Steuernummer</th>
+    <th width="10%">Aktionen</th>
+  </tr>
+  <%= render :partial => 'address', :collection => @addresses %>
+</table>

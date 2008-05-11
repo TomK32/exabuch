@@ -1,7 +1,7 @@
-<% @page_title = 'Neue Address anlegen' %>
+<% @page_title = 'Neue Adresse anlegen' %>
 
 <%= error_messages_for :address %>
-<% form_for :customer, @address, :url => addresses_url, :html => {:method => :post} do |f| %>
+<% form_for :address, @address, :url => addresses_url, :html => {:method => :post} do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <%= submit_tag 'Speichern' %>
 <% end %>

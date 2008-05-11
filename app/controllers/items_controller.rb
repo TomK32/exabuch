@@ -71,7 +71,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.js { render :nothing }
-      format.html { redirect_to(admin_items_url) }
+      format.html { redirect_to(items_url) }
       format.xml  { head :ok }
     end
   end

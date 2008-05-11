@@ -9,7 +9,7 @@ class InvoicesController < ApplicationController
   
   def index
     if params[:search]
-      @invoices = current_user.invoices.find :all, :conditions => ['title LIKE ?', "%#{params[:search]}%"]
+      @invoices = current_user.invoices.find :all, :conditions => ['title LIKE ?', "%#{params[:search]}%"], :include => [:receiver_address]
     else
       @invoices = current_user.invoices.find :all, :include => [:receiver_address]
     end

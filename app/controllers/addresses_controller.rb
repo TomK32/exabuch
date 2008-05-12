@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
   end
 
   def show
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -23,7 +23,7 @@ class AddressesController < ApplicationController
   end
 
   def new
-    @address = Address.new
+    @address = current_user.addresses.new
     respond_to do |format|
       format.js
       format.html # new.html.erb
@@ -32,7 +32,7 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
   end
 
   def create
@@ -55,7 +55,7 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
 
     respond_to do |format|
       if @address.update_attributes(params[:address])
@@ -70,7 +70,7 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
     @address.destroy
 
     respond_to do |format|

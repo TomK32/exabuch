@@ -124,7 +124,7 @@ module FPDF_INVOICE
     MyCell("Firma") if address.company?
     MyCell(address.company) if address.company?
     if address.title?: MyCell(address.title+" "+address.name) else MyCell(address.name) end
-    MyCell(address.street+" "+address.street_number) if address.street?
+    MyCell(address.street) if address.street?
     Ln(@lh)
     MyCell(address.postcode+" "+address.city) if address.postcode? && address.city?
     MyCell(address.country) if address.country?
@@ -135,25 +135,25 @@ module FPDF_INVOICE
     data = [
       [
         if address.company?: replace_UTF8(address.company) else '' end, 
-        if address.call_number?: "Tel "+replace_UTF8(address.call_number) else '' end,
+        if address.phone?: "Tel "+replace_UTF8(address.phone) else '' end,
         "Bankverbindung:",
         if address.tax_number?: "Steuernr: "+replace_UTF8(address.tax_number) else '' end
       ],
       [
         if address.title?: replace_UTF8(address.title+" "+address.name) else replace_UTF8(address.name) end,
-        if address.fax_number?: "Fax "+replace_UTF8(address.fax_number) else '' end,
+        if address.fax?: "Fax "+replace_UTF8(address.fax) else '' end,
         if address.bank_name?: replace_UTF8(address.bank_name) else '' end,
         ""
       ],
       [
-        if address.street?: replace_UTF8(address.street+" "+address.street_number) else '' end,
+        if address.street?: replace_UTF8(address.street) else '' end,
         if address.email?: replace_UTF8(address.email) else '' end,
         if address.bank_number?: "BLZ "+replace_UTF8(address.bank_number) else '' end,
         ""
       ],
       [
         if address.postcode && address.city?: replace_UTF8(address.postcode+" "+address.city) else '' end,
-        if address.website_url?: replace_UTF8(address.website_url) else '' end,
+        if address.website?: replace_UTF8(address.website) else '' end,
         if address.account_number?: "KTO "+replace_UTF8(address.account_number) else '' end,
         if address.iban?: "IBAN "+replace_UTF8(address.iban) else '' end
       ]

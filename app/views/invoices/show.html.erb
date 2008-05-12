@@ -15,7 +15,7 @@
   </tr>
   <tr>
     <th>Bereits bezahlt?</th>
-    <td><%= @invoice.payed %></td>
+    <td><%= @invoice.payed? ? 'ja' : 'nein' %></td>
     <th>Lieferdatum</th>
     <td><%= @invoice.shipping_date %></td>
   </tr>
@@ -35,9 +35,9 @@
 <table class="show">
   <tr class="fullwidth">
     <th>Absender</th>
-    <td><%= @invoice.sender_address.short_info %>
+    <td><%= link_to @invoice.sender_address.short_info, address_url(@invoice.sender_address_id) %>
     <th>Empfänger</th>
-    <td><%= @invoice.receiver_address.short_info %>
+    <td><%= link_to @invoice.receiver_address.short_info, customer_address_url(@invoice.receiver_address.customer_id, @invoice.receiver_address_id) %>
   </tr>
 </table>
 

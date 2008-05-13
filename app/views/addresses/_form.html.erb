@@ -41,7 +41,7 @@
     <td><%= f.label :postcode, "Postleitzahl" %></td>
     <td><%= f.text_field :postcode %></td>  
     <td><%= f.label :country, "Land" %></td>
-    <td><%= f.country_select :country, ['Deutschland', 'Österreich', 'Schweiz'] %></td>
+    <td><%= f.country_select :country, ['Deutschland', 'Österreich', 'Schweiz'], {}, {:style => 'width: 100%'} %></td>
   </tr>
 </table>
 </fieldset>

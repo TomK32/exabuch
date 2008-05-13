@@ -78,4 +78,7 @@ class CustomersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def confirm_destroy
+    @customer = current_user.customers.find(params[:id])
+  end
 end

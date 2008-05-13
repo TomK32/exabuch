@@ -1,0 +1,8 @@
+<% @page_title = 'Kunde löschen' %>
+
+<%= form_tag customer_path(@customer), :method => :delete %>
+  <p>
+  Wollen Sie den Kunden wirklich löschen?
+  </p>
+  <%= submit_tag 'Löschen' %> <%= link_to 'zurück zum Kunden', customer_path(@customer) %> 
+</form>

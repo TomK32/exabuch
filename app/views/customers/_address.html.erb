@@ -1,6 +1,9 @@
-<tr>
-  <td><%= link_to h(address.company), customer_address_url(@customerw, address) %></td>
+<tr class="<%= cycle 'odd', 'even' %>">
+  <td><%= link_to h(address.company), customer_address_path(@customer, address) %></td>
   <td><%= h address.name %></td>
   <td><%= h address.street %> <%= h address.postcode %> <%= h address.city %> <%= h address.country %></td>
   <td><%= h address.tax_number %></td>
+  <td><%= link_to 'zeigen', customer_address_path(@customer, address) %>
+    <%= link_to 'bearbeiten', edit_customer_address_path(@customer, address) %>
+    <%= link_to_destroy 'löschen', {:id => address.id}, {:href => confirm_destroy_customer_address_path(@customer, address)} %></td>
 </tr>

@@ -1,17 +1,38 @@
 <% @page_title = 'Kunde %s ' % @customer.name %>
 
 <h3>Adressen</h3>
-  <%= link_to 'Neue Adresse anlegen', new_customer_address_url(@customer) %>
+  <%= link_to 'Neue Adresse anlegen', new_customer_address_path(@customer) %>
 <% if @customer.addresses.nil? %>
   <p>Noch keine Adressen vorhanden</p>
 <% else %>
-<table class="form">
+<table id="addresses">
   <tr>
-    <th width="20%">Firmenname</th>
-    <th width="20%">Ansprechperson</th>
-    <th width="50%">Adresse</th>
-    <th width="10%">Steuernummer</th>
+    <th width="14%">Firmenname</th>
+    <th width="10%">Ansprechperson</th>
+    <th width="40%">Adresse</th>
+    <th width="16%">Steuernummer</th>
+    <th width="20%">Aktionen</th>
   </tr>
   <%= render :partial => 'address', :collection => @customer.addresses %>
 </table>
+<% end %>
+<h3>Rechnungen</h3>
+  <%= link_to 'Neue Rechnung stellen', new_customer_invoice_path(@customer) %>
+<% if @customer.invoices.nil? %>
+  <p>Noch keine Rechnungen vorhanden.</p>
+<% else %>  
+<table id="invoices">
+  <tr>
+    <th width="2%">#</th>
+    <th width="12%">Rechnungsdatum</th>
+    <th width="10%">bezahlt am</th>
+    <th width="40%">Titel</th>
+    <th width="8%">Bruttobetrag</th>
+    <th width="8%">Steueranteil</th>
+    <th width="20%">Aktionen</th>
+  </tr>
+  <% reset_cycle %>
+  <%= render :partial => 'invoice', :collection => @customer.invoices %>
+</table>
+
 <% end %>

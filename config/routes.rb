@@ -1,9 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :customers, :has_many => :addresses
+  map.resources :customers, :member => {:confirm_destroy => :get} do |customer|
+    customer.resources :addresses, :invoices, :member => {:confirm_destroy => :get}
+  end
   map.resources :users, :has_many => :addresses
-  map.resources :addresses
-  map.resources :invoices, :has_many => :items, :member => {:confirm_destroy => :get}
+  map.resources :addresses, :member => {:confirm_destroy => :get}
+  map.resources :invoices, :has_many => :items, :member => {:confirm_destroy => :get}, :has_one => :customer
   map.resources :items
 
   map.root :controller => 'invoices'

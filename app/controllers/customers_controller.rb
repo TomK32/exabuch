@@ -1,8 +1,14 @@
 class CustomersController < ApplicationController
   def index
-    @customers = current_user.customers.find :all
-
+    if params[:search]
+      @customers = current_user.customers.find :all, :conditions => ['name LIKE ?', "%#{params[:search]}%"]
+    else
+      unless read_fragment({:id => current_user.id})
+        @customers = current_user.customers.find :all
+      end
+    end
     respond_to do |format|
+      format.js
       format.html # index.html.erb
       format.xml  { render :xml => @customers }
     end
@@ -68,7 +74,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = "Kunde wurde gelöscht"
-      format.html { redirect_to(admin_customers_url) }
+      format.html { redirect_to(customers_url) }
       format.xml  { head :ok }
     end
   end

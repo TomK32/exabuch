@@ -1,3 +1,14 @@
-<ul>
+<% @page_title = 'Kunden' %>
+
+<table id="customers">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Rechnungen</th>
+    <th>davon offen</th>
+    <th>Aktionen</th>
+  </tr>
+  <% cache({:id => current_user.id}) do %>
   <%= render :partial => 'customer', :collection => @customers %>
-</ul>
+  <% end %>
+</table>

@@ -2,6 +2,7 @@
 
 <%= error_messages_for :address %>
 <% form_for :address, @address, :url => address_url(@address), :html => {:method => :put} do |f| %>
+  <%= hidden_field_tag(:customer_id, params[:customer_id]) unless params[:customer_id].nil? %>
   <%= render :partial => 'form', :locals => {:f => f} %>
   <%= submit_tag 'Speichern' %>
 <% end %>

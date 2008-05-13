@@ -4,6 +4,6 @@ class Address < ActiveRecord::Base
   has_many :invoices, :foreign_key => 'receiver_address_id'
   
   def short_info
-    return "%s, %s %s" % [company, postcode, city]
+    [company, [postcode, city].reject{|a| a.blank?}.join(" ")].reject{|a| a.blank?}.join(", ")
   end
 end

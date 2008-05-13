@@ -1,6 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 horst_address:
   id: 1
+  user_id: 1
   title: Herr
   company: Wollewolle Inc.
   name: Horst Tester
@@ -19,6 +20,8 @@ horst_address:
   iban: DE 055 48375345 584938574
 gabi_address:
   id: 2
+  customer_id: 1
+  user_id: 1
   title: Frau
   company: Erdnuckel Ltd.
   name: Gabi Tester

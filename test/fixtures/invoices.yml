@@ -2,6 +2,10 @@
 gabi_rechnung:
   id: 1
   number: 101
+  sender_address_id: 1
+  receiver_address_id: 2
+  user_id: 1
+  payed: true
   title: Gabis Rechnung
   description: Diese Rechnung ist für Gabi
   order_date: 2007-09-25
@@ -11,10 +15,11 @@ gabi_rechnung:
 horst_rechnung:
   id: 2
   number: 102
+  sender_address_id: 1
+  receiver_address_id: 2
   title: Horst Rechnung
   description: Diese Rechnung ist für Horst
   order_date: 2007-09-25
   billing_date: 2007-09-25
   shipping_date: 2007-09-25
-  payment_date: 2007-09-25
-  
+  payed: false

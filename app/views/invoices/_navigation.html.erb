@@ -1,7 +1,5 @@
-<ul>
-  <li><%= link_to_unless_current 'neue Rechnung', new_invoice_path %></li>
+<li><%= link_to_unless_current 'neue Rechnung', new_invoice_path %></li>
 <% unless @invoice.nil? or @invoice.new_record? %>
-  <li><%= link_to_unless_current 'PDF', formatted_invoice_path(@invoice, :pdf) %></li>
-  <li><%= link_to_destroy "löschen", {:id => @invoice.id}, {:href => confirm_destroy_invoice_path(@invoice)} %></li>
+<li><%= link_to_unless_current 'PDF', formatted_invoice_path(@invoice, :pdf) %></li>
+<li><%= link_to_destroy "löschen", {:id => @invoice.id}, {:href => confirm_destroy_invoice_path(@invoice)} %></li>
 <% end %>
-</ul>

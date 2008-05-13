@@ -1,6 +1,6 @@
 <% if params[:customer_id] %>
-  <li><%= link_to_unless_current 'zurück zum Kunden', customer_path(params[:customer_id]) %></li>
-  <li><%= link_to_unless_current 'neue Adresse', new_customer_address_path(params[:customer_id]) %></li>
+<li><%= link_to_unless_current 'zurück zum Kunden', customer_path(params[:customer_id]) %></li>
+<li><%= link_to_unless_current 'neue Adresse', new_customer_address_path(params[:customer_id]) %></li>
 <% else %>
-  <li><%= link_to_unless_current 'neue Adresse', new_address_path %></li>
+<li><%= link_to_unless_current 'neue Adresse', new_address_path %></li>
 <% end %>

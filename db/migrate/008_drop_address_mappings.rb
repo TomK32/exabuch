@@ -2,12 +2,8 @@ class DropAddressMappings < ActiveRecord::Migration
   def self.up
     add_column :invoices, :sender_address_id, :integer
     add_column :invoices, :receiver_address_id, :integer
-    Invoice.has_one :old_sender, :class_name => "AddressMapping", :foreign_key => "invoice_sender_id"
-    Invoice.has_one :old_receiver, :class_name => "AddressMapping", :foreign_key => "invoice_receiver_id"
-    Invoice.find(:all, :include => [:old_sender, :old_receiver]).each do |invoice|
-      invoice.update_attribute(:sender_address_id, invoice.old_sender.address_id)
-      invoice.update_attribute(:receiver_address_id, invoice.old_receiver.address_id)
-    end
+    execute("UPDATE invoices SET `sender_address_id` = (SELECT address_id FROM address_mappings WHERE address_mappings.invoice_sender_id = invoices.id)")
+    execute("UPDATE invoices SET `receiver_address_id` = (SELECT address_id FROM address_mappings WHERE address_mappings.invoice_receiver_id = invoices.id)")
     drop_table :address_mappings
     change_column :invoices, :sender_address_id, :integer, :null => false
     change_column :invoices, :receiver_address_id, :integer, :null => false    

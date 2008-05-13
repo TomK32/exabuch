@@ -44,10 +44,11 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        flash[:notice] = 'Address was successfully created.'
+        flash[:notice] = 'Adresse wurde angelegt'
         format.html { redirect_to address_show_path(@address)}
         format.xml  { render :xml => @address, :status => :created, :location => @address }
       else
+        flash[:error] = "Adresse konnte nicht angelegt werden"
         format.html { render :action => "new" }
         format.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
       end
@@ -59,10 +60,11 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.update_attributes(params[:address])
-        flash[:notice] = 'Address was successfully updated.'
+        flash[:notice] = 'Adresse wurde aktualisiert'
         format.html { redirect_to address_show_path(@address) }
         format.xml  { head :ok }
       else
+        flash[:error] = "Adresse konnte nicht aktualisiert werden"
         format.html { render :action => "edit" }
         format.xml  { render :xml => @address.errors, :status => :unprocessable_entity }
       end
@@ -72,7 +74,7 @@ class AddressesController < ApplicationController
   def destroy
     @address = current_user.addresses.find(params[:id])
     @address.destroy
-
+    flash[:notice] = "Adresse wurde gelöscht"
     respond_to do |format|
       format.html { redirect_to(params[:customerid].blank? ? addresses_path : customer_addresses_path(params[:customer_id])) }
       format.xml  { head :ok }

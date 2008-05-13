@@ -53,11 +53,11 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.save
-        flash[:notice] = 'Invoice was successfully created.'
+        flash[:notice] = 'Rechnung wurde angelegt'
         format.html { redirect_to(@invoice) }
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
-        flash[:error] = "Rechnung konnte nicht erstellt werden"
+        flash[:error] = "Rechnung konnte nicht angelegt werden"
         counter = Time.now.to_i
         @invoice.items.each do |item|
           # necessary to give each item a unique id and to have many of them in the form
@@ -83,10 +83,11 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
-        flash[:notice] = 'Invoice was successfully updated.'
+        flash[:notice] = 'Rechnung wurde aktualisiert'
         format.html { redirect_to(@invoice) }
         format.xml  { head :ok }
       else
+        flash[:errror] = "Rechnung konnte nicht aktualisiert werden"
         format.html { render :action => "edit" }
         format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
       end
@@ -95,6 +96,7 @@ class InvoicesController < ApplicationController
 
   def destroy
     @invoice.destroy
+    flash[:notice] = "Rechnung wurde gelöscht"
     respond_to do |format|
       format.html { redirect_to(invoices_path) }
       format.xml  { head :ok }

@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 11) do
     t.string  "bank_name"
     t.string  "bank_number"
     t.integer "user_id",        :default => 1,     :null => false
-    t.boolean "owner_by_user",  :default => false
     t.boolean "owned_by_user",  :default => false
     t.integer "customer_id"
   end

@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+  before_filter :current_customer, :only => [:show, :edit, :update, :destroy, :confirm_destroy]
+
   def index
     if params[:search]
       @customers = current_user.customers.find :all, :conditions => ['name LIKE ?', "%#{params[:search]}%"]
@@ -15,8 +17,6 @@ class CustomersController < ApplicationController
   end
 
   def show
-    @customer = current_user.customers.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @customer }
@@ -33,7 +33,6 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = current_user.customers.find(params[:id])
   end
 
   def create
@@ -53,8 +52,6 @@ class CustomersController < ApplicationController
   end
 
   def update
-    @customer = current_user.customers.find(params[:id])
-
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
         flash[:notice] = 'Kunde wurde gespeichert.'
@@ -69,7 +66,6 @@ class CustomersController < ApplicationController
   end
 
   def destroy
-    @customer = current_user.customers.find(params[:id])
     @customer.destroy
 
     respond_to do |format|
@@ -78,7 +74,12 @@ class CustomersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
   def confirm_destroy
-    @customer = current_user.customers.find(params[:id])
+  end
+  
+  protected
+  def current_customer
+    @customer ||= current_user.customers.find(params[:id])
   end
 end

@@ -45,7 +45,7 @@ class AddressesController < ApplicationController
     respond_to do |format|
       if @address.save
         flash[:notice] = 'Address was successfully created.'
-        format.html { redirect_to address_show(@address)}
+        format.html { redirect_to address_show_path(@address)}
         format.xml  { render :xml => @address, :status => :created, :location => @address }
       else
         format.html { render :action => "new" }

@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_filter :current_address, :only => [:show, :edit, :update, :destroy]
   def index
     if params[:customer_id].blank?
       @addresses = current_user.user_addresses
@@ -14,8 +15,6 @@ class AddressesController < ApplicationController
   end
 
   def show
-    @address = current_user.addresses.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @address }
@@ -32,14 +31,13 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    @address = current_user.addresses.find(params[:id])
   end
 
   def create
     if params[:customer_id]
-      @address = current_user.customers.find(params[:customer_id]).addresses.new
+      @address = current_user.customers.find(params[:customer_id]).addresses.new(params[:address].update(:owned_by_user => false))
     else
-      @address = current_user.addresses.new(params[:address])
+      @address = current_user.user_addresses.new(params[:address].update(:owned_by_user => true))
     end
 
     respond_to do |format|
@@ -56,8 +54,6 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address = current_user.addresses.find(params[:id])
-
     respond_to do |format|
       if @address.update_attributes(params[:address])
         flash[:notice] = 'Adresse wurde aktualisiert'
@@ -72,7 +68,6 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    @address = current_user.addresses.find(params[:id])
     @address.destroy
     flash[:notice] = "Adresse wurde gelöscht"
     respond_to do |format|
@@ -82,6 +77,14 @@ class AddressesController < ApplicationController
   end
   
   private
+  def current_address
+    if params[:customer_id]
+      @address = current_user.addresses.find(params[:id])
+    else
+      @address = current_user.user_addresses.find(params[:id])
+    end
+  end
+
   def address_show_path(address)
     puts params[:customer_id].blank? ? address_path(address) : customer_address_path(params[:customer_id], address) 
     params[:customer_id].blank? ? address_path(address) : customer_address_path(params[:customer_id], address) 

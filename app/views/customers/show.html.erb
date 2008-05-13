@@ -2,8 +2,8 @@
 
 <h3>Adressen</h3>
   <%= link_to 'Neue Adresse anlegen', new_customer_address_path(@customer) %>
-<% if @customer.addresses.nil? %>
-  <p>Noch keine Adressen vorhanden</p>
+<% if @customer.addresses.empty? %>
+  <p class="notice">Noch keine Adressen vorhanden. Erst wenn der Kunde eine Adresse hat kann auch eine Rechnung an ihn gestellt werden.</p>
 <% else %>
 <table id="addresses">
   <tr>
@@ -18,7 +18,7 @@
 <% end %>
 <h3>Rechnungen</h3>
   <%= link_to 'Neue Rechnung stellen', new_customer_invoice_path(@customer) %>
-<% if @customer.invoices.nil? %>
+<% if @customer.invoices.empty? %>
   <p>Noch keine Rechnungen vorhanden.</p>
 <% else %>  
 <table id="invoices">

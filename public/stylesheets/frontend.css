@@ -87,7 +87,7 @@ td {
 	padding: 5px 4px;
 	border: 1px #BBCCDD solid;
 }
-#invoices {
+#invoices, #customers, #addresses {
 	width: 100%;
 }
 
@@ -132,11 +132,11 @@ table.show td {
 	border: none;
 }
 /* navigation */
-#navigation {
+#subnavigation, #navigation {
 	margin: 5px 0;
 	padding: 0;
 }
-#navigation li {
+#subnavigation li, #navigation li {
 	display: inline;
 	font-weight: bold;
 	background-color: #DAFFCD;

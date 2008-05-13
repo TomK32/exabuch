@@ -27,7 +27,11 @@
       <li><%= link_to_unless_current 'Adressen', addresses_url %></li>
       <li><%= link_to_unless_current 'Kunden', customers_url %></li>
     </ul>
-    <%= render :partial => "#{params[:controller]}/navigation" if %w(invoices customers addresses).include?(params[:controller])  %>
+    <% if %w(invoices customers addresses).include?(params[:controller]) %>
+    <ul id="subnavigation">
+    <%= render :partial => "#{params[:controller]}/navigation"   %>
+    </ul>
+    <% end %>  
     <div id="content">
     <% flash.each do |type| %>
       <p class="message_<%= type[0] %>"><%= type[1] %></p>

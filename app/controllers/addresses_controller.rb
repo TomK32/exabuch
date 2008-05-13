@@ -1,9 +1,9 @@
 class AddressesController < ApplicationController
   def index
-    if params[:customer_id]
-      @addresses = current_user.customers.find(params[:customer_id], :include => :addresses).addresses
-    else
+    if params[:customer_id].blank?
       @addresses = current_user.user_addresses
+    else  
+      @addresses = current_user.customers.find(params[:customer_id], :include => :addresses).addresses
     end
 
     respond_to do |format|
@@ -45,7 +45,7 @@ class AddressesController < ApplicationController
     respond_to do |format|
       if @address.save
         flash[:notice] = 'Address was successfully created.'
-        format.html { redirect_to(@address) }
+        format.html { redirect_to address_show(@address)}
         format.xml  { render :xml => @address, :status => :created, :location => @address }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class AddressesController < ApplicationController
     respond_to do |format|
       if @address.update_attributes(params[:address])
         flash[:notice] = 'Address was successfully updated.'
-        format.html { redirect_to(@address) }
+        format.html { redirect_to address_show_path(@address) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,9 +74,14 @@ class AddressesController < ApplicationController
     @address.destroy
 
     respond_to do |format|
-      format.html { redirect_to(addresses_url) }
+      format.html { redirect_to(params[:customerid].blank? ? addresses_path : customer_addresses_path(params[:customer_id])) }
       format.xml  { head :ok }
     end
   end
   
+  private
+  def address_show_path(address)
+    puts params[:customer_id].blank? ? address_path(address) : customer_address_path(params[:customer_id], address) 
+    params[:customer_id].blank? ? address_path(address) : customer_address_path(params[:customer_id], address) 
+  end
 end

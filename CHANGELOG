@@ -1,8 +1,9 @@
 
 May 2008
+* plenty of bugfixes thanks to Ingo
+* branched 0.2 for next release
 * dropped ActiveScaffold for custom forms and views
-* added customer model
-
+* added customer model and controller
 
 April 2008
 * dropped address_mapping model

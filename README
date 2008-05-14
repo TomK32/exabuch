@@ -13,7 +13,9 @@ Most likely you will need some libraries for the database
 
 Then you create and migrate the database
  cd exabuch
- rake db:migrate
+ rake db:schema:load
+ alternatively you could run: rake db:migrate
+ rake goldberg:install
 
 And start the server
  ruby script/server

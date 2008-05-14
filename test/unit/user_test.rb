@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  fixtures :addresses
 
   # should have one user_address and two addresses (includes the own one)
   def test_01_addresses

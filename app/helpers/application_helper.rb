@@ -38,11 +38,9 @@ module ApplicationHelper
     number_to_currency(amount, :unit => '€ ', :separator => ',', :delimiter => '.')
   end
   
-  def link_to_destroy title, options={}, html_options={}
-    unless options.is_a?(String)
-      options = {:action => :delete}.update(options)
-    end
-    html_options = {:confirm => 'Are you sure?', :method => :delete}.update(html_options)
-    link_to title, options, html_options
+  def link_to_destroy title, confirm_message, url, fallback_url
+    url = url_for(url) unless url.is_a?(String)
+    fallback_url = url_for(fallback_url) unless fallback_url.is_a?(String)
+    link_to_function title, "confirm_destroy(this, '#{escape_javascript url}', '#{escape_javascript confirm_message}', '#{escape_javascript form_authenticity_token}')", :href => fallback_url
   end
 end

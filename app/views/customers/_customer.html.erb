@@ -3,5 +3,5 @@
   <td><%= link_to customer.name, customer_url(customer) %></td>
   <td><%= customer.invoices.count %></td>
   <td><%= customer.open_invoices.count %></td>
-  <td><%= link_to 'ändern', edit_customer_path(customer) %> <%= link_to 'zeigen', customer_path(customer) %> <%= link_to_destroy 'löschen', customer_path(customer), {:href => confirm_destroy_customer_path(customer)} %></td>
+  <td><%= link_to 'ändern', edit_customer_path(customer) %> <%= link_to 'zeigen', customer_path(customer) %> <%= link_to_destroy 'löschen', 'Wollen Sie den Kunden wirklich löschen?', customer_path(customer), confirm_destroy_customer_path(customer) %></td>
 </tr>

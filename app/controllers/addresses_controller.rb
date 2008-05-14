@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_filter :current_address, :only => [:show, :edit, :update, :destroy]
+  before_filter :current_address, :only => [:show, :edit, :update, :destroy, :confirm_destroy]
   def index
     if params[:customer_id].blank?
       @addresses = current_user.user_addresses
@@ -74,6 +74,9 @@ class AddressesController < ApplicationController
       format.html { redirect_to(params[:customerid].blank? ? addresses_path : customer_addresses_path(params[:customer_id])) }
       format.xml  { head :ok }
     end
+  end
+  
+  def confirm_destroy    
   end
   
   private

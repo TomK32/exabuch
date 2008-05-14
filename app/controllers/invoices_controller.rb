@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
 
-  before_filter :current_invoice, :only => [:show, :edit, :destroy, :confirm_destroy, :update]
+  before_filter :current_invoice, :only => [:show, :edit, :update, :destroy, :confirm_destroy]
 
   require 'fpdf'
   load 'fpdf_table.rb'

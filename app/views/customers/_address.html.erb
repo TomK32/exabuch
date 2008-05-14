@@ -5,5 +5,5 @@
   <td><%= h address.tax_number %></td>
   <td><%= link_to 'zeigen', customer_address_path(@customer, address) %>
     <%= link_to 'bearbeiten', edit_customer_address_path(@customer, address) %>
-    <%= link_to_destroy 'löschen', {:id => address.id}, {:href => confirm_destroy_customer_address_path(@customer, address)} %></td>
+    <%= link_to_destroy 'löschen', 'Wollen Sie die Adresse wirklich löschen?', customer_address_path(@customer, address), confirm_destroy_customer_address_path(@customer, address)} %></td>
 </tr>

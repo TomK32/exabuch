@@ -1,0 +1,8 @@
+<% @page_title = 'Adresse löschen' %>
+
+<%= form_tag address_path(@address), :method => :delete %>
+  <p>
+  Wollen Sie die Adresse wirklich löschen?
+  </p>
+  <%= submit_tag 'Löschen' %>
+</form>

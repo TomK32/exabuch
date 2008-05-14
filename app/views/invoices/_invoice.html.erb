@@ -8,6 +8,6 @@
   <td><%= number_to_euro(invoice.tax_amount) %></td>
   <td><%= link_to "ändern", edit_invoice_path(invoice) %>
     <%= link_to "zeigen", invoice_path(invoice) %> <%= link_to "PDF", formatted_invoice_path(invoice, :pdf) %>
-    <%= link_to_destroy "löschen", {:id => invoice.id}, {:href => confirm_destroy_invoice_path(invoice)} %> </td>
+    <%= link_to_destroy "löschen", 'Wollen Sie die Rechnung wirklich löschen?', invoice_path(invoice), confirm_destroy_invoice_path(invoice) %> </td>
     
 </tr>

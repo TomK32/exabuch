@@ -3,5 +3,7 @@
   <td><%= h address.name %></td>
   <td><%= h address.street %> <%= h address.postcode %> <%= h address.city %> <%= h address.country %></td>
   <td><%= h address.tax_number %></td>
-  <td><%= link_to 'bearbeiten', edit_address_url(address) %></td>
+  <td><%= link_to 'bearbeiten', edit_address_url(address) %>
+   <%= link_to_destroy 'löschen', 'Wollen Sie die Adresse wirklich löschen?', address_path(address), confirm_destroy_address_path(address) %>
+   </td>
 </tr>

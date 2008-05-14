@@ -1,4 +1,5 @@
 
+* invoice creation: user customers instead of user.addresses
 * invoices, customers: live-search and sorting for columns
 * customer: counter_cache for total invoices and total open invoices
 * customer: total gross plus open total gross (both cached)

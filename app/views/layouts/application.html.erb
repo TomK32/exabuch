@@ -32,6 +32,12 @@
     <%= render :partial => "#{params[:controller]}/navigation"   %>
     </ul>
     <% end %>  
+    <% if params[:controller] =~ /goldberg/ %>
+    <div id="goldberg_navigation">
+      <%= goldberg_main_menu %>
+      <%= goldberg_left_menu %>
+    </div>
+    <% end %>
     <div id="content">
     <% flash.each do |type| %>
       <p class="message_<%= type[0] %>"><%= type[1] %></p>

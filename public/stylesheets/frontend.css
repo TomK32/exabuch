@@ -142,3 +142,8 @@ table.show td {
 	background-color: #DAFFCD;
 	padding: 5px;
 }
+
+#goldberg_navigation {
+	float: right;
+	margin: 0 10px 0 0;
+}

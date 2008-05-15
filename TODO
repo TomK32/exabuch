@@ -1,9 +1,17 @@
 
+general tasks
 * invoices, customers: live-search and sorting for columns
 * customer: counter_cache for total invoices and total open invoices
 * customer: total gross plus open total gross (both cached)
-* multi-user (goldberg)
-* Umsatzsteuerbefreiung für Kleinunternehmer
-* upload of logo
-* other invoice pdf templates (maybe design a DSL, use textile)
 * auto_complete_for customer in invoice form (should save lots of sql load if many customers)
+
+0.3 (multiuser)
+* multi-user (goldberg)
+* upload of logo
+
+0.4 (the network edition)
+* granting access to customers
+
+0.5
+* Umsatzsteuerbefreiung für Kleinunternehmer
+* other invoice pdf templates (maybe design a DSL, use textile)
